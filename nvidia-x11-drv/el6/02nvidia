@@ -1,0 +1,2 @@
+c 660 root video       195   0  1 255 nvidia%d
+c 660 root video       195 255  1   1 nvidiactl
