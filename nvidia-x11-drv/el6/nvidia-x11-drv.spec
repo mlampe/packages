@@ -326,7 +326,8 @@ desktop-file-install \
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/udev/makedev.d/
 %{__install} -p -m 0644 %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/udev/makedev.d/60-nvidia.nodes
 
-# Override makedev rules
+# Override makedev rule
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/makedev.d/
 %{__install} -p -m 0644 %{SOURCE7} $RPM_BUILD_ROOT%{_sysconfdir}/makedev.d/
 
 # Install ConsoleKit scriptlet
