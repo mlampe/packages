@@ -331,7 +331,7 @@ desktop-file-install \
 
 # Install ConsoleKit scriptlet
 %{__mkdir_p} $RPM_BUILD_ROOT/usr/lib/ConsoleKit/run-seat.d/
-%{__install} -p -m 0644 %{SOURCE7} $RPM_BUILD_ROOT/usr/lib/ConsoleKit/run-seat.d/
+%{__install} -p -m 0644 %{SOURCE8} $RPM_BUILD_ROOT/usr/lib/ConsoleKit/run-seat.d/
 
 # Install alternate-install-present file
 # This file tells the NVIDIA installer that a packaged version of the driver is already present on the system
