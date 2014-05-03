@@ -32,6 +32,7 @@ Source4:	nvidia.nodes
 Source5:	alternate-install-present
 Source6:	nvidia.modprobe
 Source7:	02nvidia
+Source8:	nvidia.ck
 
 # Fix broken SONAME dependency chain
 %ifarch i686
@@ -327,6 +328,10 @@ desktop-file-install \
 
 # Override makedev rules
 %{__install} -p -m 0644 %{SOURCE7} $RPM_BUILD_ROOT%{_sysconfdir}/makedev.d/
+
+# Install ConsoleKit scriptlet
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/lib/ConsoleKit/run-seat.d/
+%{__install} -p -m 0644 %{SOURCE7} $RPM_BUILD_ROOT/usr/lib/ConsoleKit/run-seat.d/
 
 # Install alternate-install-present file
 # This file tells the NVIDIA installer that a packaged version of the driver is already present on the system
