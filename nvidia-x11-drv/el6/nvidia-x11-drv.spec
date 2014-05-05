@@ -32,7 +32,7 @@ Source4:	nvidia.nodes
 Source5:	alternate-install-present
 Source6:	nvidia.modprobe
 Source7:	02nvidia
-Source8:	nvidia.ck
+Source8:	nvidia_ck.tar.gz
 
 # Fix broken SONAME dependency chain
 %ifarch i686
@@ -43,6 +43,10 @@ Provides: libGL.so
 Provides: libnvcuvid.so()(64bit)
 Provides: libGL.so()(64bit)
 %endif
+
+# buildrequires for nvidia.ck
+BuildRequires:	glib-devel
+BuildRequires:	libacl-devel
 
 # provides desktop-file-install
 BuildRequires:	desktop-file-utils
@@ -97,7 +101,7 @@ Provides: libGL.so
 Compatibility 32-bit files for the 64-bit Proprietary NVIDIA driver.
 
 %prep
-%setup -q -c -T
+%setup -a8 -q -c -T
 
 %ifarch i686
 sh %{SOURCE0} --extract-only --target nvidiapkg
@@ -114,10 +118,11 @@ popd
 find nvidiapkg/html/ -type f | xargs chmod 0644
 
 %build
-# Nothing to build
+%{__make}
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 pushd nvidiapkg
 
@@ -330,10 +335,6 @@ desktop-file-install \
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/makedev.d/
 %{__install} -p -m 0644 %{SOURCE7} $RPM_BUILD_ROOT%{_sysconfdir}/makedev.d/
 
-# Install ConsoleKit scriptlet
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/lib/ConsoleKit/run-seat.d/
-%{__install} -p -m 0644 %{SOURCE8} $RPM_BUILD_ROOT/usr/lib/ConsoleKit/run-seat.d/
-
 # Install alternate-install-present file
 # This file tells the NVIDIA installer that a packaged version of the driver is already present on the system
 %{__install} -p -m 0644 %{SOURCE5} $RPM_BUILD_ROOT%{nvidialibdir}/alternate-install-present
@@ -427,8 +428,10 @@ fi ||:
 %{_datadir}/nvidia/nvidia-application-profiles-*
 %{_bindir}/nvidia*
 %{_sbindir}/nvidia-config-display
+%{_prefix}/lib/ConsoleKit/run-seat.d/nvidia.ck
 %config(noreplace) %{_sysconfdir}/modprobe.d/blacklist-nouveau.conf
 %config(noreplace) %{_sysconfdir}/modprobe.d/nvidia.conf
+%config(noreplace) %{_sysconfdir}/makedev.d/02nvidia
 %config %{_sysconfdir}/ld.so.conf.d/nvidia.conf
 %config %{_sysconfdir}/udev/makedev.d/60-nvidia.nodes
 %{_sysconfdir}/OpenCL/vendors/nvidia.icd
