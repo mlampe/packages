@@ -459,6 +459,12 @@ fi ||:
 %endif
 
 %changelog
+* Mon May 05 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-1.ml
+- Forked off from elrepo
+- Create all devices root:video 660
+- Build nvidia-uvm.ko and piggy-back loading and device creation to nvidia.ko
+- Use a ConsoleKit helper to add ACLs for logged-in users
+
 * Wed Apr 09 2014 Philip J Perry <phil@elrepo.org> - 331.67-1.el6.elrepo
 - Updated to version 331.67
 - Added missing libnvidia-fbc.so to the 32-bit compat package
