@@ -415,6 +415,12 @@ test -f %{_sbindir}/nvidia-config-display && %{_sbindir}/nvidia-config-display e
 %endif
 
 %changelog
+* Mon May 05 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-1.el6.ml
+- Forked off from elrepo
+- Create all devices root:root 600
+- Build nvidia-uvm.ko and piggy-back loading and device creation to nvidia.ko
+- Use pam_console to hand over device to logged-in users
+
 * Wed Apr 09 2014 Philip J Perry <phil@elrepo.org> - 331.67-1.el5.elrepo
 - Updated to version 331.67
 - Added missing libnvidia-fbc.so to the 32-bit compat package

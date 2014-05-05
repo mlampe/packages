@@ -459,7 +459,7 @@ fi ||:
 %endif
 
 %changelog
-* Mon May 05 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-1.ml
+* Mon May 05 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-1.el6.ml
 - Forked off from elrepo
 - Create all devices root:video 660
 - Build nvidia-uvm.ko and piggy-back loading and device creation to nvidia.ko

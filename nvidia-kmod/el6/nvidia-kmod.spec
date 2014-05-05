@@ -77,6 +77,10 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Mon May 05 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-1.el6.ml
+- Forked off from elrepo
+- Build nvidia-uvm.ko
+
 * Wed Apr 09 2014 Philip J Perry <phil@elrepo.org> - 331.67-1.el6.elrepo
 - Updated to version 331.67
 
