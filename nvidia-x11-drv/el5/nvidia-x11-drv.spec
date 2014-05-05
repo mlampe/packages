@@ -23,8 +23,6 @@ Source1:  ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux
 NoSource: 0
 NoSource: 1
 
-Source2:	nvidia.sh
-Source3:	nvidia.csh
 Source4:	nvidia-config-display
 Source5:	nvidia.modprobe
 Source6:	nvidia.nodes
@@ -305,11 +303,6 @@ desktop-file-install --vendor elrepo \
 %{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/nvidia/
 %{__install} -p -m 0644 nvidia-application-profiles-%{version}-rc $RPM_BUILD_ROOT%{_datadir}/nvidia/
 
-# Install profile.d files
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/
-%{__install} -p -m 0644 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/nvidia.sh
-%{__install} -p -m 0644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/nvidia.csh
-
 # Install X configuration script
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sbindir}/
 %{__install} -p -m 0755 %{SOURCE4} $RPM_BUILD_ROOT%{_sbindir}/nvidia-config-display
@@ -415,6 +408,9 @@ test -f %{_sbindir}/nvidia-config-display && %{_sbindir}/nvidia-config-display e
 %endif
 
 %changelog
+* Tue May 06 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-2.el5.ml
+- remove profile.d scriptlets
+
 * Mon May 05 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-1.el5.ml
 - Forked off from elrepo
 - Create all devices root:root 600
