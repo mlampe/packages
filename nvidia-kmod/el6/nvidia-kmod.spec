@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 2.6.32-431.el6.%{_target_cpu}}
 
 Name:	 %{kmod_name}-kmod
-Version: 331.67
+Version: 331.79
 Release: 1%{?dist}
 Group:	 System Environment/Kernel
 License: Proprietary
@@ -77,6 +77,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Tue May 20 2014 Michael Lampe <mlampe0@googlemail.com> - 331.79-1.el6.ml
+- Update to 331.79
+
 * Mon May 05 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-1.el6.ml
 - Forked off from elrepo
 - Build nvidia-uvm.ko
