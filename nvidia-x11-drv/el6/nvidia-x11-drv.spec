@@ -9,8 +9,8 @@
 %define		debug_package	%{nil}
 
 Name:		nvidia-x11-drv
-Version:	331.67
-Release:	2%{?dist}
+Version:	331.79
+Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -424,6 +424,9 @@ fi ||:
 %endif
 
 %changelog
+* Tue May 20 2014 Michael Lampe <mlampe0@googlemail.com> - 331.79-1.el6.ml
+- Updated to version 331.79
+
 * Tue May 06 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-2.el6.ml
 - remove libtool archives
 - prune so links: only keep those needed/intended for linking a program
