@@ -1,2 +1,2 @@
 options nvidia NVreg_ModifyDeviceFiles=0
-install nvidia /sbin/modprobe --ignore-install nvidia && /sbin/modprobe nvidia-uvm && /bin/mknod -m 0660 /dev/nvidia-uvm c `/bin/grep nvidia-uvm /proc/devices | /bin/cut -d' ' -f1` 0 && /bin/chgrp video /dev/nvidia-uvm
+install nvidia /sbin/modprobe --ignore-install nvidia && /sbin/modprobe nvidia-uvm && /bin/rm -f /dev/nvidia-uvm && /bin/mknod -m 0660 /dev/nvidia-uvm c `/bin/grep nvidia-uvm /proc/devices | /bin/cut -d' ' -f1` 0 && /bin/chgrp video /dev/nvidia-uvm
