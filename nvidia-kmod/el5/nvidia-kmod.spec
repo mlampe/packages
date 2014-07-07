@@ -6,7 +6,7 @@
 %{!?kversion: %define kversion 2.6.18-371.el5}
 
 Name:    %{kmod_name}-kmod
-Version: 331.79
+Version: 331.89
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -96,6 +96,9 @@ done
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Tue Jul 07 2014 Michael Lampe <mlampe0@googlemail.com> - 331.89-1.el5.ml
+- Updated to version 331.89
+
 * Tue May 20 2014 Michael Lampe <mlampe0@googlemail.com> - 331.79-1.el5.ml
 - Updated to version 331.79
 
