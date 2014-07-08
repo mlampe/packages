@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 2.6.32-431.el6.%{_target_cpu}}
 
 Name:	 %{kmod_name}-kmod
-Version: 331.89
+Version: 340.24
 Release: 1%{?dist}
 Group:	 System Environment/Kernel
 License: Proprietary
@@ -77,7 +77,10 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
-* Tue Jul 09 2014 Michael Lampe <mlampe0@googlemail.com> - 331.89-1.el6.ml
+* Wed Jul 09 2014 Michael Lampe <mlampe0@googlemail.com> - 340.24-1.el6.ml
+- Update to 340.24
+
+* Tue Jul 08 2014 Michael Lampe <mlampe0@googlemail.com> - 331.89-1.el6.ml
 - Update to 331.89
 
 * Tue May 20 2014 Michael Lampe <mlampe0@googlemail.com> - 331.79-1.el6.ml
