@@ -4,7 +4,7 @@
 %define		debug_package	%{nil}
 
 Name:		nvidia-x11-drv
-Version:	331.89
+Version:	340.24
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -137,14 +137,12 @@ pushd nvidiapkg
 %{__install} -p -m 0755 libnvidia-tls.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libOpenCL.so.* $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 tls/*.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/tls/
-# There are now some libs that are only present in the 32-bit driver (331.20 driver)
-%ifarch i386
+# Added 64 bit libEGL and libGLES libs in 340.24 driver
 %{__install} -p -m 0755 libEGL.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libGLESv1_CM.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libGLESv2.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libnvidia-eglcore.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libnvidia-glsi.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
-%endif
 
 %ifarch x86_64
 # Install 32bit compat GL, tls and vdpau libs
@@ -211,12 +209,10 @@ pushd nvidiapkg
 %{__ln_s} libnvidia-wfb.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/libwfb.so
 %{__ln_s} libnvidia-wfb.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/libnvidia-wfb.so.1
 %{__ln_s} libvdpau_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_nvidia.so.1
-# Create symlinks for 32-bit specific packages (331.20 driver)
-%ifarch i386
+# Added 64 bit libEGL and libGLES libs in 340.24 driver
 %{__ln_s} libEGL.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libEGL.so.1
 %{__ln_s} libGLESv1_CM.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libGLESv1_CM.so.1
 %{__ln_s} libGLESv2.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libGLESv2.so.2
-%endif
 
 %ifarch x86_64
 # Create the 32-bit symlinks
@@ -269,6 +265,8 @@ desktop-file-install --vendor elrepo \
 # added in 319.17
 %{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/nvidia/
 %{__install} -p -m 0644 nvidia-application-profiles-%{version}-rc $RPM_BUILD_ROOT%{_datadir}/nvidia/
+# added in 340.24
+%{__install} -p -m 0644 nvidia-application-profiles-%{version}-key-documentation $RPM_BUILD_ROOT%{_datadir}/nvidia/
 
 # Install X configuration script
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sbindir}/
@@ -371,7 +369,10 @@ test -f %{_sbindir}/nvidia-config-display && %{_sbindir}/nvidia-config-display e
 %endif
 
 %changelog
-* Tue Jul 07 2014 Michael Lampe <mlampe0@googlemail.com> - 331.89-1.el5.ml
+* Tue Jul 08 2014 Michael Lampe <mlampe0@googlemail.com> - 340.24-1.el5.ml
+- Updated to version 340.24
+
+* Mon Jul 07 2014 Michael Lampe <mlampe0@googlemail.com> - 331.89-1.el5.ml
 - Updated to version 331.89
 
 * Tue May 20 2014 Michael Lampe <mlampe0@googlemail.com> - 331.79-1.el5.ml
