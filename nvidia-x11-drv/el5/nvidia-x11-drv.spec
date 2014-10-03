@@ -4,7 +4,7 @@
 %define		debug_package	%{nil}
 
 Name:		nvidia-x11-drv
-Version:	340.32
+Version:	340.46
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -369,6 +369,9 @@ test -f %{_sbindir}/nvidia-config-display && %{_sbindir}/nvidia-config-display e
 %endif
 
 %changelog
+* Thu Oct 02 2014 Michael Lampe <mlampe0@googlemail.com> - 340.46-1.el5.ml
+- Updated to version 340.46
+
 * Wed Aug 13 2014 Michael Lampe <mlampe0@googlemail.com> - 340.32-1.el5.ml
 - Updated to version 340.32
 
