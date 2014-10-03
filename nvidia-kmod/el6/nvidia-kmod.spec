@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 2.6.32-431.el6.%{_target_cpu}}
 
 Name:	 %{kmod_name}-kmod
-Version: 340.32
+Version: 340.46
 Release: 1%{?dist}
 Group:	 System Environment/Kernel
 License: Proprietary
@@ -77,17 +77,20 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Oct 02 2014 Michael Lampe <mlampe0@googlemail.com> - 340.46-1.el6.ml
+- Updated to 340.46
+
 * Thu Aug 14 2014 Michael Lampe <mlampe0@googlemail.com> - 340.32-1.el6.ml
-- Update to 340.32
+- Updated to 340.32
 
 * Wed Jul 09 2014 Michael Lampe <mlampe0@googlemail.com> - 340.24-1.el6.ml
-- Update to 340.24
+- Updated to 340.24
 
 * Tue Jul 08 2014 Michael Lampe <mlampe0@googlemail.com> - 331.89-1.el6.ml
-- Update to 331.89
+- Updated to 331.89
 
 * Tue May 20 2014 Michael Lampe <mlampe0@googlemail.com> - 331.79-1.el6.ml
-- Update to 331.79
+- Updated to 331.79
 
 * Mon May 05 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-1.el6.ml
 - Forked off from elrepo
