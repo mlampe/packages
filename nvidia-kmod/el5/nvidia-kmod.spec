@@ -3,10 +3,10 @@
 
 # If kversion isn't defined on the rpmbuild line, define it here.
 # kABI compatible with kernel 2.6.18-194.el5 upwards
-%{!?kversion: %define kversion 2.6.18-371.el5}
+%{!?kversion: %define kversion 2.6.18-398.el5}
 
 Name:    %{kmod_name}-kmod
-Version: 340.46
+Version: 340.58
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -96,6 +96,9 @@ done
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Fri Nov 07 2014 Michael Lampe <mlampe0@googlemail.com> - 340.58-1.el5.ml
+- Updated to version 340.58
+
 * Thu Oct 02 2014 Michael Lampe <mlampe0@googlemail.com> - 340.46-1.el5.ml
 - Updated to version 340.46
 
