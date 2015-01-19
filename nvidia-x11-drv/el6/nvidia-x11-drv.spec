@@ -9,7 +9,7 @@
 %define		debug_package	%{nil}
 
 Name:		nvidia-x11-drv
-Version:	340.65
+Version:	346.35
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -158,6 +158,8 @@ pushd nvidiapkg
 %{__install} -p -m 0755 libGLESv2.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libnvidia-eglcore.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libnvidia-glsi.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
+# Added libnvidia-gtk2.so in 346.35 driver
+%{__install} -p -m 0755 libnvidia-gtk2.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 
 %ifarch x86_64
 # Install 32bit compat GL, tls and vdpau libs
@@ -422,6 +424,9 @@ fi ||:
 %endif
 
 %changelog
+* Mon Jan 19 2015 Michael Lampe <mlampe0@googlemail.com> - 346.35-1.el6.ml
+- Update to 346.35
+
 * Tue Dec 16 2014 Michael Lampe <mlampe0@googlemail.com> - 340.65-1.el6.ml
 - Updated to 340.65
 
