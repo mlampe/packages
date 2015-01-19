@@ -6,7 +6,7 @@
 %{!?kversion: %define kversion 2.6.18-398.el5}
 
 Name:    %{kmod_name}-kmod
-Version: 340.58
+Version: 340.65
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -96,6 +96,9 @@ done
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Tue Dec 16 2014 Michael Lampe <mlampe0@googlemail.com> - 340.65-1.el5.ml
+- Updated to version 340.65
+
 * Fri Nov 07 2014 Michael Lampe <mlampe0@googlemail.com> - 340.58-1.el5.ml
 - Updated to version 340.58
 
