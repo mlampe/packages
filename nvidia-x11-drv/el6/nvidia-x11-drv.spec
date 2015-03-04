@@ -1,7 +1,7 @@
 # Define the Max Xorg version (ABI) that this driver release supports
 # See README.txt, Chapter 2. Minimum Software Requirements or
 # ftp://download.nvidia.com/XFree86/Linux-x86_64/325.15/README/minimumrequirements.html
-%define		max_xorg_ver	1.16.99
+%define		max_xorg_ver	1.17.99
 
 %define		nvidialibdir	%{_libdir}/nvidia
 %define		nvidialib32dir	%{_prefix}/lib/nvidia
@@ -9,7 +9,7 @@
 %define		debug_package	%{nil}
 
 Name:		nvidia-x11-drv
-Version:	346.35
+Version:	346.47
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -424,6 +424,9 @@ fi ||:
 %endif
 
 %changelog
+* Wed Mar 04 2015 Michael Lampe <mlampe0@googlemail.com> - 346.47-1.el6.ml
+- Update to 346.47
+
 * Mon Jan 19 2015 Michael Lampe <mlampe0@googlemail.com> - 346.35-1.el6.ml
 - Update to 346.35
 
