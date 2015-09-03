@@ -2,10 +2,10 @@
 %define	 kmod_name nvidia
 
 # If kversion isn't defined on the rpmbuild line, define it here.
-%{!?kversion: %define kversion 2.6.32-504.el6.%{_target_cpu}}
+%{!?kversion: %define kversion 2.6.32-573.el6.%{_target_cpu}}
 
 Name:	 %{kmod_name}-kmod
-Version: 346.82
+Version: 352.41
 Release: 1%{?dist}
 Group:	 System Environment/Kernel
 License: Proprietary
@@ -77,6 +77,15 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Sep 03 2015 Michael Lampe <mlampe0@googlemail.com> - 352.41-1.el6.ml
+- Updated to 352.41
+
+* Mon Jul 27 2015 Michael Lampe <mlampe0@googlemail.com> - 346.87-2.el6.ml
+- Rebuilt for kernel 2.6.32-573
+
+* Thu Jul 23 2015 Michael Lampe <mlampe0@googlemail.com> - 346.87-1.el6.ml
+- Updated to 346.87
+
 * Tue Jun 23 2015 Michael Lampe <mlampe0@googlemail.com> - 346.82-1.el6.ml
 - Updated to 346.82
 
