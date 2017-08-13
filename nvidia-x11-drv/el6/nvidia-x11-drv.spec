@@ -11,7 +11,7 @@
 
 Name:		nvidia-x11-drv
 Version:	384.59
-Release:	1%{?dist}
+Release:	2%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -114,8 +114,8 @@ pushd nvidiapkg
 %{__install} -p -m 0644 nvidia_icd.json.template $RPM_BUILD_ROOT%{_sysconfdir}/vulkan/icd.d/nvidia_icd.json
 %{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/glvnd/egl_vendor.d/
 %{__install} -p -m 0644 10_nvidia.json $RPM_BUILD_ROOT%{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
-#%{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/egl/egl_external_platform.d/
-#%{__install} -p -m 0644 10_nvidia_wayland.json $RPM_BUILD_ROOT%{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
+%{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/egl/egl_external_platform.d/
+%{__install} -p -m 0644 10_nvidia_wayland.json $RPM_BUILD_ROOT%{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
 
 # Install GL, tls and vdpau libs
 %{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/vdpau/
@@ -222,7 +222,6 @@ pushd nvidiapkg
 %{__ln_s} libGLESv2_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libGLESv2_nvidia.so.2
 %{__ln_s} libGL.so.1.0.0 $RPM_BUILD_ROOT%{nvidialibdir}/libGL.so.1
 %{__ln_s} libGLX_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libGLX_nvidia.so.0
-%{__ln_s} libGLX_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libGLX_indirect.so.0
 # Added libnvcuvid.so in 260.xx series driver
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvcuvid.so
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvcuvid.so.1
@@ -259,7 +258,6 @@ pushd nvidiapkg
 %{__ln_s} libGLESv2_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/libGLESv2_nvidia.so.2
 %{__ln_s} libGL.so.1.0.0 $RPM_BUILD_ROOT%{nvidialib32dir}/libGL.so.1
 %{__ln_s} libGLX_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/libGLX_nvidia.so.0
-%{__ln_s} libGLX_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/libGLX_indirect.so.0
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/libnvcuvid.so
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/libnvcuvid.so.1
 %{__ln_s} libnvidia-encode.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/libnvidia-encode.so
@@ -339,6 +337,11 @@ echo %{nvidialib32dir} >> $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/nvidia.conf
 #echo %{_prefix}/lib/vdpau >> $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/nvidia.conf
 %endif
 
+# Install scriptlets to set GLX vendor name
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/
+echo "export __GLX_VENDOR_LIBRARY_NAME=nvidia" > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/nvidia.sh
+echo "setenv __GLX_VENDOR_LIBRARY_NAME nvidia" > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/nvidia.csh
+
 popd
 
 %clean
@@ -408,7 +411,7 @@ fi ||:
 %{_mandir}/man1/nvidia*.*
 %{_datadir}/pixmaps/nvidia-settings.png
 %{_datadir}/applications/*nvidia-settings.desktop
-#%{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
+%{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
 %{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
 %dir %{_datadir}/nvidia
 %{_datadir}/nvidia/nvidia-application-profiles-*
@@ -429,6 +432,7 @@ fi ||:
 %config %{_sysconfdir}/udev/makedev.d/60-nvidia.nodes
 %{_sysconfdir}/OpenCL/vendors/nvidia.icd
 %{_sysconfdir}/vulkan/icd.d/nvidia_icd.json
+%{_sysconfdir}/profile.d/nvidia.*sh
 
 # now the libs
 %dir %{nvidialibdir}
@@ -453,6 +457,10 @@ fi ||:
 %endif
 
 %changelog
+* Mon Aug 14 2017 Michael Lampe <mlampe0@googlemail.com> - 384.59-2.el6.ml
+- Added scriptlets to set GLX vendor name
+- Removed all links to libGLX_indirect.so.0
+
 * Sun Aug 13 2017 Michael Lampe <mlampe0@googlemail.com> - 384.59-1.el6.ml
 - Updated to version 384.59
 
