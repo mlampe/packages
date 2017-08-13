@@ -2,10 +2,10 @@
 %define	 kmod_name nvidia
 
 # If kversion isn't defined on the rpmbuild line, define it here.
-%{!?kversion: %define kversion 2.6.32-573.el6.%{_target_cpu}}
+%{!?kversion: %define kversion 2.6.32-696.el6.%{_target_cpu}}
 
 Name:	 %{kmod_name}-kmod
-Version: 352.55
+Version: 384.59
 Release: 1%{?dist}
 Group:	 System Environment/Kernel
 License: Proprietary
@@ -39,7 +39,11 @@ of the same variant of the Linux kernel and not on any one specific build.
 %prep
 %setup -q -c -T
 echo "override %{kmod_name} * weak-updates/%{kmod_name}" > kmod-%{kmod_name}.conf
+#echo "override %{kmod_name}-drm * weak-updates/%{kmod_name}" >> kmod-%{kmod_name}.conf
+#echo "override %{kmod_name}-modeset * weak-updates/%{kmod_name}" >> kmod-%{kmod_name}.conf
+%ifarch x86_64
 echo "override %{kmod_name}-uvm * weak-updates/%{kmod_name}" >> kmod-%{kmod_name}.conf
+%endif
 
 %ifarch i686
 sh %{SOURCE0} --extract-only --target nvidiapkg
@@ -55,79 +59,137 @@ sh %{SOURCE1} --extract-only --target nvidiapkg
 export SYSSRC=%{_usrsrc}/kernels/%{kversion}
 pushd _kmod_build_/kernel
 %{__make} module
-cd uvm
-%{__make}
 popd
 
 %install
 export INSTALL_MOD_PATH=%{buildroot}
 export INSTALL_MOD_DIR=extra/%{kmod_name}
-pushd _kmod_build_/kernel
 ksrc=%{_usrsrc}/kernels/%{kversion}
-%{__make} -C "${ksrc}" modules_install M=$PWD
-cd uvm
+pushd _kmod_build_/kernel
 %{__make} -C "${ksrc}" modules_install M=$PWD
 popd
 %{__install} -d %{buildroot}%{_sysconfdir}/depmod.d/
 %{__install} kmod-%{kmod_name}.conf %{buildroot}%{_sysconfdir}/depmod.d/
 # Remove the unrequired files.
 %{__rm} -f %{buildroot}/lib/modules/%{kversion}/modules.*
+# Remove the unwanted files
+%{__rm} -f %{buildroot}/lib/modules/%{kversion}/extra/nvidia/nvidia-drm.ko
+%{__rm} -f %{buildroot}/lib/modules/%{kversion}/extra/nvidia/nvidia-modeset.ko
 
 %clean
 %{__rm} -rf %{buildroot}
 
 %changelog
-* Wed Oct 14 2015 Michael Lampe <mlampe0@googlemail.com> - 352.55-1.el6.ml
-- Updated to 352.55
+* Sun Aug 13 2017 Michael Lampe <mlampe0@googlemail.com> - 384.69-1.el6.ml
+- Updated to version 384.59
 
-* Thu Sep 03 2015 Michael Lampe <mlampe0@googlemail.com> - 352.41-1.el6.ml
-- Updated to 352.41
+* Sun Aug 13 2017 Michael Lampe <mlampe0@googlemail.com> - 375.82-1.el6.ml
+- Updated to version 375.82
 
-* Mon Jul 27 2015 Michael Lampe <mlampe0@googlemail.com> - 346.87-2.el6.ml
-- Rebuilt for kernel 2.6.32-573
+* Fri May  5 2017 Michael Lampe <mlampe0@googlemail.com> - 375.66-1.el6.ml
+- Updated to version 375.66
 
-* Thu Jul 23 2015 Michael Lampe <mlampe0@googlemail.com> - 346.87-1.el6.ml
-- Updated to 346.87
+* Fri Mar 24 2017 Michael Lampe <mlampe0@googlemail.com> - 375.39-2.el6.ml
+- Rebuild for 6.9 kernel
 
-* Tue Jun 23 2015 Michael Lampe <mlampe0@googlemail.com> - 346.82-1.el6.ml
-- Updated to 346.82
+* Thu Mar 23 2017 Michael Lampe <mlampe0@googlemail.com> - 375.39-1.el6.ml
+- Resync with elrepo
 
-* Tue May 12 2015 Michael Lampe <mlampe0@googlemail.com> - 346.72-1.el6.ml
-- Updated to 346.72
+* Wed Feb 22 2017 Philip J Perry <phil@elrepo.org> - 375.39-1
+- Updated to version 375.39
 
-* Wed Apr 08 2015 Michael Lampe <mlampe0@googlemail.com> - 346.59-1.el6.ml
-- Updated to 346.59
+* Thu Dec 15 2016 Philip J Perry <phil@elrepo.org> - 375.26-1
+- Updated to version 375.26
 
-* Wed Mar 04 2015 Michael Lampe <mlampe0@googlemail.com> - 346.47-1.el6.ml
-- Updated to 346.47
+* Sat Nov 19 2016 Philip J Perry <phil@elrepo.org> - 375.20-1
+- Updated to version 375.20
 
-* Mon Jan 19 2015 Michael Lampe <mlampe0@googlemail.com> - 346.35-1.el6.ml
-- Updated to 346.35
+* Tue Oct 11 2016 Philip J Perry <phil@elrepo.org> - 367.57-1
+- Updated to version 367.57
 
-* Tue Dec 16 2014 Michael Lampe <mlampe0@googlemail.com> - 340.65-1.el6.ml
-- Updated to 340.65
+* Sat Aug 27 2016 Philip J Perry <phil@elrepo.org> - 367.44-1
+- Updated to version 367.44
 
-* Fri Nov 07 2014 Michael Lampe <mlampe0@googlemail.com> - 340.58-1.el6.ml
-- Updated to 340.58
+* Sat Jul 16 2016 Philip J Perry <phil@elrepo.org> - 367.35-1
+- Updated to version 367.35
 
-* Thu Oct 02 2014 Michael Lampe <mlampe0@googlemail.com> - 340.46-1.el6.ml
-- Updated to 340.46
+* Tue Jun 14 2016 Philip J Perry <phil@elrepo.org> - 367.27-1
+- Updated to version 367.27
+- Adds nvidia-drm kernel module
 
-* Thu Aug 14 2014 Michael Lampe <mlampe0@googlemail.com> - 340.32-1.el6.ml
-- Updated to 340.32
+* Wed May 25 2016 Philip J Perry <phil@elrepo.org> - 361.45.11-1
+- Updated to version 361.45.11
 
-* Wed Jul 09 2014 Michael Lampe <mlampe0@googlemail.com> - 340.24-1.el6.ml
-- Updated to 340.24
+* Thu Mar 31 2016 Philip J Perry <phil@elrepo.org> - 361.42-1
+- Updated to version 361.42
 
-* Tue Jul 08 2014 Michael Lampe <mlampe0@googlemail.com> - 331.89-1.el6.ml
-- Updated to 331.89
+* Tue Mar 01 2016 Philip J Perry <phil@elrepo.org> - 361.28-1
+- Updated to version 361.28
+- Adds nvidia-modeset kernel module
 
-* Tue May 20 2014 Michael Lampe <mlampe0@googlemail.com> - 331.79-1.el6.ml
-- Updated to 331.79
+* Sun Jan 31 2016 Philip J Perry <phil@elrepo.org> - 352.79-1
+- Updated to version 352.79
 
-* Mon May 05 2014 Michael Lampe <mlampe0@googlemail.com> - 331.67-1.el6.ml
-- Forked off from elrepo
-- Build nvidia-uvm.ko
+* Fri Nov 20 2015 Philip J Perry <phil@elrepo.org> - 352.63-1
+- Updated to version 352.63
+
+* Sat Oct 17 2015 Philip J Perry <phil@elrepo.org> - 352.55-1
+- Updated to version 352.55
+
+* Sat Aug 29 2015 Philip J Perry <phil@elrepo.org> - 352.41-1
+- Updated to version 352.41
+
+* Sat Aug 01 2015 Philip J Perry <phil@elrepo.org> - 352.30-1
+- Updated to version 352.30
+- Built against RHEL-6.7 kernel
+
+* Fri Jul 03 2015 Philip J Perry <phil@elrepo.org> - 352.21-3
+- Add blacklist() provides.
+- Revert modalias() provides.
+
+* Wed Jul 01 2015 Philip J Perry <phil@elrepo.org> - 352.21-2
+- Add modalias() provides.
+
+* Wed Jun 17 2015 Philip J Perry <phil@elrepo.org> - 352.21-1
+- Updated to version 352.21
+
+* Wed Apr 08 2015 Philip J Perry <phil@elrepo.org> - 346.59-1
+- Updated to version 346.59
+
+* Wed Feb 25 2015 Philip J Perry <phil@elrepo.org> - 346.47-1
+- Updated to version 346.47
+
+* Sat Jan 17 2015 Philip J Perry <phil@elrepo.org> - 346.35-1
+- Updated to version 346.35
+- Drops support of older G8x, G9x, and GT2xx GPUs
+- Drops support for UVM on 32-bit architectures
+
+* Fri Dec 12 2014 Philip J Perry <phil@elrepo.org> - 340.65-1.el6.elrepo
+- Updated to version 340.65
+
+* Thu Nov 06 2014 Philip J Perry <phil@elrepo.org> - 340.58-1.el6.elrepo
+- Updated to version 340.58
+
+* Sat Oct 04 2014 Philip J Perry <phil@elrepo.org> - 340.46-1.el6.elrepo
+- Updated to version 340.46
+
+* Sat Aug 16 2014 Philip J Perry <phil@elrepo.org> - 340.32-1.el6.elrepo
+- Updated to version 340.32
+
+* Wed Jul 09 2014 Philip J Perry <phil@elrepo.org> - 340.24-1.el6.elrepo
+- Updated to version 340.24
+
+* Sat Jul 05 2014 Philip J Perry <phil@elrepo.org> - 331.89-1.el6.elrepo
+- Updated to version 331.89
+
+* Wed May 21 2014 Philip J Perry <phil@elrepo.org> - 331.79-1.el6.elrepo
+- Updated to version 331.79
+
+* Sat May 03 2014 Philip J Perry <phil@elrepo.org> - 331.67-3.el6.elrepo
+- Add nvidia-modprobe
+
+* Fri May 02 2014 Philip J Perry <phil@elrepo.org> - 331.67-2.el6.elrepo
+- Build the nvidia-uvm module required for CUDA
 
 * Wed Apr 09 2014 Philip J Perry <phil@elrepo.org> - 331.67-1.el6.elrepo
 - Updated to version 331.67
