@@ -11,7 +11,7 @@
 
 Name:		nvidia-x11-drv
 Version:	384.59
-Release:	2%{?dist}
+Release:	3%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -299,6 +299,10 @@ desktop-file-install \
     --add-category System \
     nvidia-settings.desktop
 
+# Set vulkan icd file name
+%{__perl} -pi -e 's|__NV_VK_ICD__|libGLX_nvidia.so.0|' \
+    $RPM_BUILD_ROOT%{_sysconfdir}/vulkan/icd.d/nvidia_icd.json
+
 # Install application profiles
 # added in 319.17
 %{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/nvidia/
@@ -457,6 +461,9 @@ fi ||:
 %endif
 
 %changelog
+* Thu Aug 17 2017 Michael Lampe <mlampe0@googlemail.com> - 384.59-3.el6.ml 
+- Set vulkan icd file name
+
 * Mon Aug 14 2017 Michael Lampe <mlampe0@googlemail.com> - 384.59-2.el6.ml
 - Added scriptlets to set GLX vendor name
 - Removed all links to libGLX_indirect.so.0
