@@ -10,8 +10,8 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	384.59
-Release:	3%{?dist}
+Version:	384.69
+Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -461,6 +461,9 @@ fi ||:
 %endif
 
 %changelog
+* Wed Aug 23 2017 Michael Lampe <mlampe0@googlemail.com> - 384.69-1.el6.ml
+- Updated to version 384.69
+
 * Thu Aug 17 2017 Michael Lampe <mlampe0@googlemail.com> - 384.59-3.el6.ml 
 - Set vulkan icd file name
 
