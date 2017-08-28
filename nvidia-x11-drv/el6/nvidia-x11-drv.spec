@@ -11,7 +11,7 @@
 
 Name:		nvidia-x11-drv
 Version:	384.69
-Release:	1%{?dist}
+Release:	2%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -120,7 +120,7 @@ pushd nvidiapkg
 # Install GL, tls and vdpau libs
 %{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/vdpau/
 %{__mkdir_p} $RPM_BUILD_ROOT%{nvidialibdir}/
-%{__mkdir_p} $RPM_BUILD_ROOT%{nvidialibdir}/tls/
+#%{__mkdir_p} $RPM_BUILD_ROOT%{nvidialibdir}/tls/
 %{__install} -p -m 0755 libcuda.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libEGL_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libEGL.so.1 $RPM_BUILD_ROOT%{nvidialibdir}/
@@ -161,8 +161,9 @@ pushd nvidiapkg
 %{__install} -p -m 0755 libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-ptxjitcompiler.so in 361.28 driver
 %{__install} -p -m 0755 libnvidia-ptxjitcompiler.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
-%{__install} -p -m 0755 libnvidia-tls.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
-%{__install} -p -m 0755 tls/*.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/tls/
+#%{__install} -p -m 0755 libnvidia-tls.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
+#%{__install} -p -m 0755 tls/*.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/tls/
+%{__install} -p -m 0755 tls/*.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 #%{__install} -p -m 0755 libOpenCL.so.1.0.0 $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libOpenGL.so in 361.28 driver
 %{__install} -p -m 0755 libOpenGL.so.0 $RPM_BUILD_ROOT%{nvidialibdir}/
@@ -172,7 +173,7 @@ pushd nvidiapkg
 # Install 32bit compat GL, tls and vdpau libs
 %{__mkdir_p} $RPM_BUILD_ROOT%{_prefix}/lib/vdpau/
 %{__mkdir_p} $RPM_BUILD_ROOT%{nvidialib32dir}/
-%{__mkdir_p} $RPM_BUILD_ROOT%{nvidialib32dir}/tls/
+#%{__mkdir_p} $RPM_BUILD_ROOT%{nvidialib32dir}/tls/
 %{__install} -p -m 0755 32/libcuda.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/
 %{__install} -p -m 0755 32/libEGL_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/
 %{__install} -p -m 0755 32/libEGL.so.1 $RPM_BUILD_ROOT%{nvidialib32dir}/
@@ -201,8 +202,9 @@ pushd nvidiapkg
 %{__install} -p -m 0755 32/libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/
 # Added libnvidia-ptxjitcompiler.so in 361.28 driver
 %{__install} -p -m 0755 32/libnvidia-ptxjitcompiler.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/
-%{__install} -p -m 0755 32/libnvidia-tls.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/
-%{__install} -p -m 0755 32/tls/*.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/tls/
+#%{__install} -p -m 0755 32/libnvidia-tls.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/
+#%{__install} -p -m 0755 32/tls/*.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/tls/
+%{__install} -p -m 0755 32/tls/*.so.%{version} $RPM_BUILD_ROOT%{nvidialib32dir}/
 #%{__install} -p -m 0755 32/libOpenCL.so.1.0.0 $RPM_BUILD_ROOT%{nvidialib32dir}/
 %{__install} -p -m 0755 32/libOpenGL.so.0 $RPM_BUILD_ROOT%{nvidialib32dir}/
 %{__install} -p -m 0755 32/libvdpau_nvidia.so.%{version} $RPM_BUILD_ROOT%{_prefix}/lib/vdpau/
@@ -442,8 +444,8 @@ fi ||:
 %dir %{nvidialibdir}
 %{nvidialibdir}/lib*
 %{nvidialibdir}/alternate-install*
-%dir %{nvidialibdir}/tls
-%{nvidialibdir}/tls/lib*
+#%dir %{nvidialibdir}/tls
+#%{nvidialibdir}/tls/lib*
 %{_libdir}/vdpau/libvdpau_nvidia.*
 %{_libdir}/xorg/modules/drivers/nvidia_drv.so
 %dir %{_libdir}/xorg/modules/extensions/nvidia
@@ -455,12 +457,15 @@ fi ||:
 %defattr(-,root,root,-)
 %dir %{nvidialib32dir}
 %{nvidialib32dir}/lib*
-%dir %{nvidialib32dir}/tls
-%{nvidialib32dir}/tls/lib*
+#%dir %{nvidialib32dir}/tls
+#%{nvidialib32dir}/tls/lib*
 %{_prefix}/lib/vdpau/libvdpau_nvidia.*
 %endif
 
 %changelog
+* Mon Aug 28 2017 Michael Lampe <mlampe0@googlemail.com> - 384.69-2.el6.ml
+- Install only one libnvidia-tls.so
+
 * Wed Aug 23 2017 Michael Lampe <mlampe0@googlemail.com> - 384.69-1.el6.ml
 - Updated to version 384.69
 
