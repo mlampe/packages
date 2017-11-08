@@ -10,8 +10,8 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	384.69
-Release:	2%{?dist}
+Version:	384.98
+Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -463,6 +463,12 @@ fi ||:
 %endif
 
 %changelog
+* Sat Nov  4 2017 Michael Lampe <mlampe0@googlemail.com> - 384.98-1.el6.ml
+- Updated to version 384.98
+
+* Wed Sep 27 2017 Michael Lampe <mlampe0@googlemail.com> - 384.90-1.el6.ml
+- Updated to version 384.90
+
 * Mon Aug 28 2017 Michael Lampe <mlampe0@googlemail.com> - 384.69-2.el6.ml
 - Install only one libnvidia-tls.so
 

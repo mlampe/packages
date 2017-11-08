@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 2.6.32-696.el6.%{_target_cpu}}
 
 Name:	 %{kmod_name}-kmod
-Version: 384.69
+Version: 384.98
 Release: 1%{?dist}
 Group:	 System Environment/Kernel
 License: Proprietary
@@ -80,6 +80,12 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Sat Nov  4 2017 Michael Lampe <mlampe0@googlemail.com> - 384.98-1.el6.ml
+- Updated to version 384.98
+
+* Wed Sep 27 2017 Michael Lampe <mlampe0@googlemail.com> - 384.90-1.el6.ml
+- Updated to version 384.90
+
 * Wed Aug 23 2017 Michael Lampe <mlampe0@googlemail.com> - 384.69-1.el6.ml
 - Updated to version 384.69
 
