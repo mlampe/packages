@@ -47,7 +47,6 @@ export SYSSRC=%{_usrsrc}/kernels/%{kversion}
 pushd _kmod_build_/kernel
 %{__make} %{?_smp_mflags} module
 popd
-rm -f %{kmod_name}-modeset.ko
 
 %install
 %{__install} -d %{buildroot}/lib/modules/%{kversion}/extra/%{kmod_name}/
