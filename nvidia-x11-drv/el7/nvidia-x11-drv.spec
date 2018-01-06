@@ -10,8 +10,8 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	384.98
-Release:	3%{?dist}
+Version:	384.111
+Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -352,6 +352,9 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/nvidia/libglx.*
 
 %changelog
+* Sat Jan  6 2018 Michael Lampe <mlampe0@googlemail.com> - 384.111-1
+- Updated to version 384.111
+
 * Sun Dec 10 2017 Michael Lampe <mlampe0@googlemail.com> - 384.98-3
 - Removed stuff I don't want
 - Removed superfluous symlinks

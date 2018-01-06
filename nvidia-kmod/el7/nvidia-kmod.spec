@@ -5,8 +5,8 @@
 %{!?kversion: %define kversion 3.10.0-693.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 384.98
-Release: 2%{?dist}
+Version: 384.111
+Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
 Summary: NVIDIA OpenGL kernel driver module
@@ -64,6 +64,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Sat Jan  6 2018 Michael Lampe <mlampe0@googlemail.com> - 385.111-1
+- Updated to version 384.111
+
 * Sun Dec 10 2017 Michael Lampe <mlampe0@googlemail.com> - 385.98-2
 - Removed some stuff I don't need
 
