@@ -10,7 +10,7 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	384.98
+Version:	384.111
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -463,6 +463,9 @@ fi ||:
 %endif
 
 %changelog
+* Sat Jan  6 2018 Michael Lampe <mlampe0@googlemail.com> - 384.111-1.el6.ml
+- Updated to version 384.111
+
 * Sat Nov  4 2017 Michael Lampe <mlampe0@googlemail.com> - 384.98-1.el6.ml
 - Updated to version 384.98
 
