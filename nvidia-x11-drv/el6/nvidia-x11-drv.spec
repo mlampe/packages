@@ -11,7 +11,7 @@
 
 Name:		nvidia-x11-drv
 Version:	390.25
-Release:	1%{?dist}
+Release:	2%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -463,6 +463,9 @@ fi ||:
 %endif
 
 %changelog
+* Sat Feb  3 2018 Michael Lampe <mlampe0@googlemail.com> - 390.25-2.el6.ml
+- add /dev/nvidia-uvm-tools
+
 * Mon Jan 29 2018 Michael Lampe <mlampe0@googlemail.com> - 390.25-1.el6.ml
 - Updated to version 390.25
 
