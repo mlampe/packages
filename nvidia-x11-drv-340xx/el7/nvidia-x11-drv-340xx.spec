@@ -319,7 +319,7 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/nvidia/libglx.*
 
 %changelog
-* Sun Feb 25 2018 Michael Lampe <mlampe0@google.org> - 340.106-2
+* Sun Feb 25 2018 Michael Lampe <mlampe0@googlemail.com> - 340.106-2
 - removed stuff I don't like
 
 * Fri Feb 02 2018 Philip J Perry <phil@elrepo.org> - 340.106-1
