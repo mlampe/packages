@@ -2,11 +2,11 @@
 %define	 kmod_name nvidia
 
 # If kversion isn't defined on the rpmbuild line, define it here.
-%{!?kversion: %define kversion 2.6.32-696.el6.%{_target_cpu}}
+%{!?kversion: %define kversion 2.6.32-696.23.1.el6.%{_target_cpu}}
 
 Name:	 %{kmod_name}-kmod
 Version: 390.42
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group:	 System Environment/Kernel
 License: Proprietary
 Summary: NVIDIA OpenGL kernel driver module
@@ -80,6 +80,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Mar 15 2018 Michael Lampe <mlampe0@googlemail.com> - 390.42-2.el6.ml
+- rebuilt for retpoline
+
 * Tue Mar 13 2018 Michael Lampe <mlampe0@googlemail.com> - 390.42-1.el6.ml
 - Updated to version 390.42
 
