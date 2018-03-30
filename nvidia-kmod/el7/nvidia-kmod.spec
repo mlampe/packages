@@ -5,8 +5,8 @@
 %{!?kversion: %define kversion 3.10.0-693.21.1.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 390.42
-Release: 2%{?dist}
+Version: 390.48
+Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
 Summary: NVIDIA OpenGL kernel driver module
@@ -64,6 +64,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Fri Mar 30 2018 Michael Lampe <mlampe0@googlemail.com> - 390.48-1
+- Updated to version 390.48
+
 * Fri Mar 16 2018 Michael Lampe <mlampe0@googlemail.com> - 390.42-2
 - rebuilt for retpoline
 
