@@ -1,0 +1,16 @@
+--- conftest.sh.orig	2018-05-01 00:49:24.464593033 +0200
++++ conftest.sh	2018-05-01 00:51:34.223083914 +0200
+@@ -1791,6 +1791,13 @@
+             compile_check_conftest "$CODE" "NV_NODE_END_PFN_PRESENT" "" "functions"
+         ;;
+         get_user_pages_remote)
++            # HACK!
++            echo "#define NV_GET_USER_PAGES_REMOTE_PRESENT" | append_conftest "functions"
++            echo "#define NV_GET_USER_PAGES_REMOTE_HAS_WRITE_AND_FORCE_ARGS" | append_conftest "functions"
++            echo "#undef NV_GET_USER_PAGES_REMOTE_HAS_LOCKED_ARG" | append_conftest "functions"
++            echo "#define NV_GET_USER_PAGES_HAS_WRITE_AND_FORCE_ARGS" | append_conftest "functions"
++            echo "#define NV_GET_USER_PAGES_HAS_TASK_STRUCT" | append_conftest "functions"
++            return
+             #
+             # Determine if the function get_user_pages_remote() is
+             # present and has write/force parameters.
