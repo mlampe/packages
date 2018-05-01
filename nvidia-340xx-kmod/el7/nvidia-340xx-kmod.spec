@@ -2,11 +2,11 @@
 %define kmod_name nvidia-340xx
 
 # If kversion isn't defined on the rpmbuild line, define it here.
-%{!?kversion: %define kversion 3.10.0-693.21.1.el7.%{_target_cpu}}
+%{!?kversion: %define kversion 3.10.0-862.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
 Version: 340.106
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
 Summary: NVIDIA OpenGL kernel driver module
@@ -20,6 +20,10 @@ ExclusiveArch: x86_64
 Source0:  ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}.run
 Source1:  blacklist-nouveau.conf
 Source10: kmodtool-%{kmod_name}-el7.sh
+
+# Patches.
+Patch1: conftest.patch
+Patch2: nv-linux.patch
 
 NoSource: 0
 
@@ -45,6 +49,8 @@ sh %{SOURCE0} --extract-only --target nvidiapkg
 %build
 export SYSSRC=%{_usrsrc}/kernels/%{kversion}
 pushd _kmod_build_/kernel
+patch -p0 <%{PATCH1}
+patch -p0 <%{PATCH2}
 %{__make} module
 popd
 pushd _kmod_build_/kernel/uvm
@@ -79,6 +85,9 @@ done
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Mon Apr 30 2018 Michael Lampe <mlampe0@googlemail.com> - 340.106-3
+- Rebuilt for 7.5 kernel
+
 * Wed Mar 14 2018 Michael Lampe <mlampe0@googlemail.com> - 340.106-2
 - Rebuilt for retpoline
 
