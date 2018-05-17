@@ -2,7 +2,7 @@
 # See README.txt, Chapter 2. Minimum Software Requirements or
 # http://us.download.nvidia.com/XFree86/Linux-x86_64/384.98/README/minimumrequirements.html
 
-%define		max_xorg_ver	1.19.99
+%define		max_xorg_ver	1.20.99
 
 %define		nvidialibdir	%{_libdir}/nvidia
 
@@ -10,7 +10,7 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	390.48
+Version:	390.59
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -123,6 +123,8 @@ pushd nvidiapkg
 %{__install} -p -m 0644 nvidia_icd.json.template $RPM_BUILD_ROOT%{_sysconfdir}/vulkan/icd.d/nvidia_icd.json
 %{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/glvnd/egl_vendor.d/
 %{__install} -p -m 0644 10_nvidia.json $RPM_BUILD_ROOT%{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
+%{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/egl/egl_external_platform.d/
+%{__install} -p -m 0644 10_nvidia_wayland.json $RPM_BUILD_ROOT%{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
 
 # Install GL, tls and vdpau libs
 %{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/vdpau/
@@ -144,6 +146,8 @@ pushd nvidiapkg
 %{__install} -p -m 0755 libnvidia-compiler.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-eglcore.so in 340.24 driver
 %{__install} -p -m 0755 libnvidia-eglcore.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
+# Added libnvidia-egl-wayland.so in 367.27 driver
+%{__install} -p -m 0755 libnvidia-egl-wayland.so.1.0.2 $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-encode.so in 310.19 driver
 %{__install} -p -m 0755 libnvidia-encode.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-fatbinaryloader.so in 361.28 driver
@@ -208,6 +212,7 @@ pushd nvidiapkg
 %{__ln_s} libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-opencl.so.1
 %{__ln_s} libnvidia-ptxjitcompiler.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ptxjitcompiler.so.1
 %{__ln_s} libOpenGL.so.0 $RPM_BUILD_ROOT%{nvidialibdir}/libOpenGL.so
+%{__ln_s} libnvidia-egl-wayland.so.1.0.2 $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-egl-wayland.so.1
 %{__ln_s} libglx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/nvidia/libglx.so
 %{__ln_s} libvdpau_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_nvidia.so.1
 
@@ -325,6 +330,7 @@ fi ||:
 %{_mandir}/man1/nvidia*.*
 %{_datadir}/pixmaps/nvidia-settings.png
 %{_datadir}/applications/*nvidia-settings.desktop
+%{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
 %{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
 %dir %{_datadir}/nvidia
 %{_datadir}/nvidia/nvidia-application-profiles-*
@@ -355,6 +361,10 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/nvidia/libglx.*
 
 %changelog
+* Thu May 17 2018 Michael Lampe <mlampe0@googlemail.com> - 390.59-1
+- Updated to version 390.59
+- Added wayland bits
+
 * Fri Mar 30 2018 Michael Lampe <mlampe0@googlemail.com> - 390.48-1
 - Updated to version 390.48
 
