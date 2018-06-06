@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 2.6.32-696.23.1.el6.%{_target_cpu}}
 
 Name:	 %{kmod_name}-kmod
-Version: 390.59
+Version: 390.67
 Release: 1%{?dist}
 Group:	 System Environment/Kernel
 License: Proprietary
@@ -80,6 +80,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Wed Jun  6 2018 Michael Lampe <mlampe0@googlemail.com> - 390.67-1
+- Updated to version 390.67
+
 * Thu May 17 2018 Michael Lampe <mlampe0@googlemail.com> - 390.59-1
 - Updated to version 390.59
 
