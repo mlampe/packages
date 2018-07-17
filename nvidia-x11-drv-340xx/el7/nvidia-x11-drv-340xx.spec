@@ -1,7 +1,7 @@
 # Define the Max Xorg version (ABI) that this driver release supports
 # See README.txt, Chapter 2. Minimum Software Requirements or
 # ftp://download.nvidia.com/XFree86/Linux-x86_64/340.106/README/minimumrequirements.html
-%define		max_xorg_ver	1.19.99
+%define		max_xorg_ver	1.20.99
 
 %define		nvidialibdir	%{_libdir}/nvidia
 %define		nvidialib32dir	%{_prefix}/lib/nvidia
@@ -9,8 +9,8 @@
 %define		debug_package	%{nil}
 
 Name:		nvidia-x11-drv-340xx
-Version:	340.106
-Release:	2%{?dist}
+Version:	340.107
+Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -319,6 +319,9 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/nvidia/libglx.*
 
 %changelog
+* Thu Jun 07 2018 Michael Lampe <mlampe0@googlemail.com> - 340.107-1
+- Updated to version 340.107
+
 * Sun Feb 25 2018 Michael Lampe <mlampe0@googlemail.com> - 340.106-2
 - removed stuff I don't like
 
