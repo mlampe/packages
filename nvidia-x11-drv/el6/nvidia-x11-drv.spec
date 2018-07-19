@@ -9,7 +9,7 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	390.77
+Version:	396.45
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -157,6 +157,9 @@ pushd nvidiapkg
 #%{__install} -p -m 0755 libOpenCL.so.1.0.0 $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libOpenGL.so in 361.28 driver
 %{__install} -p -m 0755 libOpenGL.so.0 $RPM_BUILD_ROOT%{nvidialibdir}/
+# Added libnvidia-glvkspirv.so in 396.xx driver
+%{__install} -p -m 0755 libnvidia-glvkspirv.so.396.45 $RPM_BUILD_ROOT%{nvidialibdir}/
+
 %{__install} -p -m 0755 libvdpau_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/vdpau/
 
 # Install X driver and extension 
@@ -368,6 +371,9 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/nvidia/libglx.*
 
 %changelog
+* Thu Jul 19 2018 Michael Lampe <mlampe0@googlemail.com> - 396.45-1.el6.ml
+- Updated to version 396.45
+
 * Tue Jul 17 2018 Michael Lampe <mlampe0@googlemail.com> - 390.77-1.el6.ml
 - Updated to version 390.77
 
