@@ -10,7 +10,7 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	396.51
+Version:	396.54
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -363,6 +363,9 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/nvidia/libglx.*
 
 %changelog
+* Tue Aug 21 2018 Michael Lampe <mlampe0@googlemail.com> - 396.54-1
+- Updated to version 396.54
+
 * Sat Aug  4 2018 Michael Lampe <mlampe0@googlemail.com> - 396.51-1
 - Updated to version 396.51
 
