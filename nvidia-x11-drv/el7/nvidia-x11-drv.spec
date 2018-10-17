@@ -1,6 +1,6 @@
 # Define the Max Xorg version (ABI) that this driver release supports
 # See README.txt, Chapter 2. Minimum Software Requirements or
-# http://us.download.nvidia.com/XFree86/Linux-x86_64/384.98/README/minimumrequirements.html
+# http://us.download.nvidia.com/XFree86/Linux-x86_64/410.66/README/minimumrequirements.html
 
 %define		max_xorg_ver	1.20.99
 
@@ -10,7 +10,7 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	396.54
+Version:	410.66
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -25,7 +25,6 @@ Source0:	http://us.download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Li
 NoSource: 0
 
 Source1:	nvidia-xorg.conf
-Source2:	99-nvidia.conf
 Source3:	nvidia.ld.so.conf
 Source4:	alternate-install-present
 Source6:	nvidia.sh
@@ -53,6 +52,8 @@ Requires(post):	 grubby
 Requires(preun): grubby
 
 # elrepo
+Conflicts:	nvidia-x11-drv-390xx
+Conflicts:	nvidia-x11-drv-390xx-32bit
 Conflicts:	nvidia-x11-drv-367xx
 Conflicts:	nvidia-x11-drv-367xx-32bit
 Conflicts:	nvidia-x11-drv-340xx
@@ -123,8 +124,6 @@ pushd nvidiapkg
 %{__install} -p -m 0644 nvidia_icd.json.template $RPM_BUILD_ROOT%{_sysconfdir}/vulkan/icd.d/nvidia_icd.json
 %{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/glvnd/egl_vendor.d/
 %{__install} -p -m 0644 10_nvidia.json $RPM_BUILD_ROOT%{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
-#%{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/egl/egl_external_platform.d/
-#%{__install} -p -m 0644 10_nvidia_wayland.json $RPM_BUILD_ROOT%{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
 
 # Install GL, tls and vdpau libs
 %{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/vdpau/
@@ -142,12 +141,12 @@ pushd nvidiapkg
 %{__install} -p -m 0755 libGLX_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvcuvid.so in 260.xx series driver
 %{__install} -p -m 0755 libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
+# Added libnvidia-cbl.so in 410.57 beta driver
+%{__install} -p -m 0755 libnvidia-cbl.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libnvidia-cfg.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libnvidia-compiler.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-eglcore.so in 340.24 driver
 %{__install} -p -m 0755 libnvidia-eglcore.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
-# Added libnvidia-egl-wayland.so in 367.27 driver
-#%{__install} -p -m 0755 libnvidia-egl-wayland.so.1.0.2 $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-encode.so in 310.19 driver
 %{__install} -p -m 0755 libnvidia-encode.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-fatbinaryloader.so in 361.28 driver
@@ -157,8 +156,10 @@ pushd nvidiapkg
 %{__install} -p -m 0755 libnvidia-glcore.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-glsi.so in 340.24 driver
 %{__install} -p -m 0755 libnvidia-glsi.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
+# Added in 396.18 driver
+%{__install} -p -m 0755 libnvidia-glvkspirv.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added in 346.35 driver
-%{__install} -p -m 0755 libnvidia-gtk2.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
+%{__install} -p -m 0755 libnvidia-gtk3.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-ifr.so in 325.15 driver
 %{__install} -p -m 0755 libnvidia-ifr.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-ml.so in 270.xx series driver
@@ -167,18 +168,20 @@ pushd nvidiapkg
 %{__install} -p -m 0755 libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libnvidia-ptxjitcompiler.so in 361.28 driver
 %{__install} -p -m 0755 libnvidia-ptxjitcompiler.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
+# Added libnvidia-rtcore.so in 410.57 beta drivers
+%{__install} -p -m 0755 libnvidia-rtcore.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 tls/libnvidia-tls.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
+# Added libnvoptix.so in 410.57 beta drivers
+%{__install} -p -m 0755 libnvoptix.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 # Added libOpenGL.so in 361.28 driver
 %{__install} -p -m 0755 libOpenGL.so.0 $RPM_BUILD_ROOT%{nvidialibdir}/
-# Added libnvidia-glvkspirv.so in 396.xx driver
-%{__install} -p -m 0755 libnvidia-glvkspirv.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/
 %{__install} -p -m 0755 libvdpau_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/vdpau/
 
 # Install X driver and extension 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/drivers/
-%{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/nvidia/
+%{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/
 %{__install} -p -m 0755 nvidia_drv.so $RPM_BUILD_ROOT%{_libdir}/xorg/modules/drivers/
-%{__install} -p -m 0755 libglx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/nvidia/
+%{__install} -p -m 0755 libglxserver_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/
 
 # Create the symlinks
 %{__ln_s} libcuda.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libcuda.so
@@ -207,15 +210,13 @@ pushd nvidiapkg
 # Added libnvidia-ml.so in 270.xx series driver
 %{__ln_s} libnvidia-ml.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ml.so
 %{__ln_s} libnvidia-ml.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ml.so.1
-# Added libnvidia-vgxcfg.so in 325.15 driver and removed in 331.20 driver
-# %{__ln_s} libnvidia-vgxcfg.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-vgxcfg.so
-# %{__ln_s} libnvidia-vgxcfg.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-vgxcfg.so.1
 # Added libnvidia-opencl.so in 304.xx series driver
 %{__ln_s} libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-opencl.so.1
 %{__ln_s} libnvidia-ptxjitcompiler.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ptxjitcompiler.so.1
+# Added libnvoptix.so in 410.57 beta drivers
+%{__ln_s} libnvoptix.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvoptix.so.1
 %{__ln_s} libOpenGL.so.0 $RPM_BUILD_ROOT%{nvidialibdir}/libOpenGL.so
-#%{__ln_s} libnvidia-egl-wayland.so.1.0.2 $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-egl-wayland.so.1
-%{__ln_s} libglx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/nvidia/libglx.so
+%{__ln_s} libglxserver_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/libglxserver_nvidia.so
 %{__ln_s} libvdpau_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_nvidia.so.1
 
 # Install man pages
@@ -252,8 +253,6 @@ desktop-file-install \
 # Install the Xorg conf files
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/X11/
 %{__install} -p -m 0644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/X11/nvidia-xorg.conf
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/X11/xorg.conf.d/
-%{__install} -p -m 0644 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/xorg.conf.d/99-nvidia.conf
 # Install ld.so.conf.d file
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/
 %{__install} -p -m 0644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/nvidia.conf
@@ -300,29 +299,6 @@ fi || :
 
 /sbin/ldconfig
 
-%preun
-if [ "$1" -eq "0" ]; then # uninstall
-    # Backup and remove xorg.conf
-    [ -f %{_sysconfdir}/X11/xorg.conf ] && \
-      mv %{_sysconfdir}/X11/xorg.conf %{_sysconfdir}/X11/post-nvidia.xorg.conf.elreposave &>/dev/null
-    # Clear grub option to disable nouveau for all RHEL7 kernels
-    if [ -f %{_sysconfdir}/default/grub ]; then
-      %{__perl} -pi -e 's|(GRUB_CMDLINE_LINUX=.*) nouveau\.modeset=0|$1|g' %{_sysconfdir}/default/grub
-      %{__perl} -pi -e 's|(GRUB_CMDLINE_LINUX=.*) rd\.driver\.blacklist=nouveau|$1|g' %{_sysconfdir}/default/grub
-      %{__perl} -pi -e 's|(GRUB_CMDLINE_LINUX=.*) plymouth\.ignore-udev|$1|g' %{_sysconfdir}/default/grub
-    fi
-    if [ -x /usr/sbin/grubby ]; then
-      # get installed kernels
-      for KERNEL in $(rpm -q --qf '%{v}-%{r}.%{arch}\n' kernel); do
-        VMLINUZ="/boot/vmlinuz-"$KERNEL
-        if [[ -e "$VMLINUZ" ]]; then
-          /usr/sbin/grubby --update-kernel="$VMLINUZ" \
-            --remove-args='nouveau.modeset=0 rd.driver.blacklist=nouveau plymouth.ignore-udev' &>/dev/null
-        fi
-      done
-    fi
-fi ||:
-
 %postun
 /sbin/ldconfig
 
@@ -332,7 +308,6 @@ fi ||:
 %{_mandir}/man1/nvidia*.*
 %{_datadir}/pixmaps/nvidia-settings.png
 %{_datadir}/applications/*nvidia-settings.desktop
-#%{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
 %{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
 %dir %{_datadir}/nvidia
 %{_datadir}/nvidia/nvidia-application-profiles-*
@@ -346,7 +321,6 @@ fi ||:
 %{_bindir}/nvidia-smi
 %{_bindir}/nvidia-xconfig
 %config %{_sysconfdir}/X11/nvidia-xorg.conf
-%config %{_sysconfdir}/X11/xorg.conf.d/99-nvidia.conf
 %config %{_sysconfdir}/ld.so.conf.d/nvidia.conf
 %config(noreplace) %{_sysconfdir}/profile.d/nvidia.csh
 %config(noreplace) %{_sysconfdir}/profile.d/nvidia.sh
@@ -359,44 +333,49 @@ fi ||:
 %{nvidialibdir}/alternate-install*
 %{_libdir}/vdpau/libvdpau_nvidia.*
 %{_libdir}/xorg/modules/drivers/nvidia_drv.so
-%dir %{_libdir}/xorg/modules/extensions/nvidia
-%{_libdir}/xorg/modules/extensions/nvidia/libglx.*
+%{_libdir}/xorg/modules/extensions/libglxserver_nvidia.*
 
 %changelog
-* Tue Aug 21 2018 Michael Lampe <mlampe0@googlemail.com> - 396.54-1
+* Wed Oct 17 2018 Michael Lampe <mlampe0@googlemail.com> - 410.66-1.el7.ml
+- Resynced with elrepo
+
+* Tue Oct 16 2018 Philip J Perry <phil@elrepo.org> - 410.66-1
+- Updated to version 410.66
+
+* Sat Oct 06 2018 Philip J Perry <phil@elrepo.org> - 410.57-2
+- Install libglxserver_nvidia.so to default location
+- Remove libnvidia-gtk2.so on RHEL7
+
+* Sat Sep 22 2018 Philip J Perry <phil@elrepo.org> - 410.57-1
+- Updated to version 410.57 beta driver
+
+* Mon Sep 17 2018 Philip J Perry <phil@elrepo.org> - 396.54-1
 - Updated to version 396.54
 
-* Sat Aug  4 2018 Michael Lampe <mlampe0@googlemail.com> - 396.51-1
-- Updated to version 396.51
+* Mon Aug 27 2018 Philip J Perry <phil@elrepo.org> - 390.87-1
+- Updated to version 390.87
 
-* Fri Jul 27 2018 Michael Lampe <mlampe0@googlemail.com> - 396.45-1
-- Updated to version 396.45
-
-* Tue Jul 17 2018 Michael Lampe <mlampe0@googlemail.com> - 390.77-1
+* Tue Jul 17 2018 Philip J Perry <phil@elrepo.org> - 390.77-1
 - Updated to version 390.77
 
-* Tue Jun  5 2018 Michael Lampe <mlampe0@googlemail.com> - 390.67-1
+* Wed Jun 06 2018 Philip J Perry <phil@elrepo.org> - 390.67-1
 - Updated to version 390.67
 
-* Thu May 17 2018 Michael Lampe <mlampe0@googlemail.com> - 390.59-1
+* Fri May 18 2018 Philip J Perry <phil@elrepo.org> - 390.59-1
 - Updated to version 390.59
+- Adds support for Xorg 1.20 (Video Driver ABI 24)
 
-* Fri Mar 30 2018 Michael Lampe <mlampe0@googlemail.com> - 390.48-1
+* Fri Mar 30 2018 Philip J Perry <phil@elrepo.org> - 390.48-1
 - Updated to version 390.48
 
-* Tue Mar 13 2018 Michael Lampe <mlampe0@googlemail.com> - 390.42-1
+* Fri Mar 16 2018 Philip J Perry <phil@elrepo.org> - 390.42-1
 - Updated to version 390.42
 
-* Mon Jan 29 2018 Michael Lampe <mlampe0@googlemail.com> - 390.25-1
+* Tue Jan 30 2018 Philip J Perry <phil@elrepo.org> - 390.25-1
 - Updated to version 390.25
 
-* Sat Jan  6 2018 Michael Lampe <mlampe0@googlemail.com> - 384.111-1
+* Fri Jan 05 2018 Philip J Perry <phil@elrepo.org> - 384.111-1
 - Updated to version 384.111
-
-* Sun Dec 10 2017 Michael Lampe <mlampe0@googlemail.com> - 384.98-3
-- Removed stuff I don't want
-- Removed superfluous symlinks
-- Removed NVIDIA's libOpenCL
 
 * Tue Nov 07 2017 Philip J Perry <phil@elrepo.org> - 384.98-2
 - Add CUDA provides for nvidia-drivers
