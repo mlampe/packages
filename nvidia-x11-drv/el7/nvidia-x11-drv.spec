@@ -10,7 +10,7 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	410.66
+Version:	410.73
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -336,6 +336,9 @@ fi || :
 %{_libdir}/xorg/modules/extensions/libglxserver_nvidia.*
 
 %changelog
+* Fri Oct 26 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-1.el7.ml
+- Updated to version 410.73
+
 * Wed Oct 17 2018 Michael Lampe <mlampe0@googlemail.com> - 410.66-1.el7.ml
 - Resynced with elrepo
 
