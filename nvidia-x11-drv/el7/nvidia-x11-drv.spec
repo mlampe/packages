@@ -9,7 +9,7 @@
 
 Name:		nvidia-x11-drv
 Version:	410.73
-Release:	2%{?dist}
+Release:	3%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -114,8 +114,8 @@ pushd nvidiapkg
 # Set lib in vulkan icd template
 %{__perl} -pi -e 's|__NV_VK_ICD__|libGLX_nvidia.so.0|' nvidia_icd.json.template
 # Install vulkan and EGL loaders
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/vulkan/icd.d/
-%{__install} -p -m 0644 nvidia_icd.json.template $RPM_BUILD_ROOT%{_sysconfdir}/vulkan/icd.d/nvidia_icd.json
+%{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/vulkan/icd.d/
+%{__install} -p -m 0644 nvidia_icd.json.template $RPM_BUILD_ROOT%{_datadir}/vulkan/icd.d/nvidia_icd.json
 %{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/glvnd/egl_vendor.d/
 %{__install} -p -m 0644 10_nvidia.json $RPM_BUILD_ROOT%{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
 
@@ -176,6 +176,7 @@ pushd nvidiapkg
 %{__ln_s} libGLESv1_CM_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libGLESv1_CM_nvidia.so.1
 %{__ln_s} libGLESv2_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libGLESv2_nvidia.so.2
 %{__ln_s} libGLX_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libGLX_nvidia.so.0
+%{__ln_s} %{_libdir}/libGLX_nvidia.so.0 $RPM_BUILD_ROOT%{_libdir}/libGLX_indirect.so.0
 # Added libnvcuvid.so in 260.xx series driver
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvcuvid.so
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvcuvid.so.1
@@ -280,6 +281,7 @@ fi || :
 %{_datadir}/pixmaps/nvidia-settings.png
 %{_datadir}/applications/*nvidia-settings.desktop
 %{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
+%{_datadir}/vulkan/icd.d/nvidia_icd.json
 %dir %{_datadir}/nvidia
 %{_datadir}/nvidia/nvidia-application-profiles-*
 %{_bindir}/nvidia-bug-report.sh
@@ -293,7 +295,6 @@ fi || :
 %{_bindir}/nvidia-xconfig
 %config %{_sysconfdir}/X11/nvidia-xorg.conf
 %{_sysconfdir}/OpenCL/vendors/nvidia.icd
-%{_sysconfdir}/vulkan/icd.d/nvidia_icd.json
 
 # now the libs
 %{_libdir}/lib*
@@ -302,6 +303,9 @@ fi || :
 %{_libdir}/xorg/modules/extensions/libglxserver_nvidia.*
 
 %changelog
+* Fri Nov  2 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-3.el7.ml
+- Add libGLX_indirect.so.0 -> libGLX_nvidia.so.0 to workaround Mesa bugs
+
 * Tue Oct 30 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-2.el7.ml
 - Adapted to libglvnd support in RHEL 7.6
 
