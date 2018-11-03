@@ -176,6 +176,7 @@ pushd nvidiapkg
 %{__ln_s} libGLESv1_CM_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libGLESv1_CM_nvidia.so.1
 %{__ln_s} libGLESv2_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libGLESv2_nvidia.so.2
 %{__ln_s} libGLX_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libGLX_nvidia.so.0
+# Workaround buggy mesa
 %{__ln_s} %{_libdir}/libGLX_nvidia.so.0 $RPM_BUILD_ROOT%{_libdir}/libGLX_indirect.so.0
 # Added libnvcuvid.so in 260.xx series driver
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvcuvid.so
@@ -279,7 +280,7 @@ fi || :
 %doc nvidiapkg/html/*
 %{_mandir}/man1/nvidia*.*
 %{_datadir}/pixmaps/nvidia-settings.png
-%{_datadir}/applications/*nvidia-settings.desktop
+%{_datadir}/applications/nvidia-settings.desktop
 %{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
 %{_datadir}/vulkan/icd.d/nvidia_icd.json
 %dir %{_datadir}/nvidia
