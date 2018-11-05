@@ -1,7 +1,4 @@
 # Define the Max Xorg version (ABI) that this driver release supports
-# See README.txt, Chapter 2. Minimum Software Requirements or
-# http://us.download.nvidia.com/XFree86/Linux-x86_64/410.66/README/minimumrequirements.html
-
 %define		max_xorg_ver	1.20.99
 
 %define		debug_package	%{nil}
@@ -34,6 +31,7 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	perl
 
 Requires:	perl
+Requires:	libglvnd
 Requires:	xorg-x11-server-Xorg <= %{max_xorg_ver}
 Requires:	nvidia-kmod = %{?epoch:%{epoch}:}%{version}
 Requires(post):	nvidia-kmod = %{?epoch:%{epoch}:}%{version}
