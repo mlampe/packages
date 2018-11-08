@@ -43,35 +43,6 @@ Requires(post):	 dracut
 Requires(post):	 grubby
 Requires(preun): grubby
 
-# elrepo
-Conflicts:	nvidia-x11-drv-390xx
-Conflicts:	nvidia-x11-drv-390xx-32bit
-Conflicts:	nvidia-x11-drv-367xx
-Conflicts:	nvidia-x11-drv-367xx-32bit
-Conflicts:	nvidia-x11-drv-340xx
-Conflicts:	nvidia-x11-drv-340xx-32bit
-Conflicts:	nvidia-x11-drv-304xx
-Conflicts:	nvidia-x11-drv-304xx-32bit
-Conflicts:	nvidia-x11-drv-173xx
-Conflicts:	nvidia-x11-drv-173xx-32bit
-Conflicts:	nvidia-x11-drv-96xx
-Conflicts:	nvidia-x11-drv-96xx-32bit
-
-# rpmforge
-Conflicts:	dkms-nvidia
-Conflicts:	dkms-nvidia-x11-drv
-Conflicts:	dkms-nvidia-x11-drv-32bit
-
-Conflicts:	xorg-x11-drv-nvidia
-Conflicts:	xorg-x11-drv-nvidia-beta
-Conflicts:	xorg-x11-drv-nvidia-legacy
-Conflicts:	xorg-x11-drv-nvidia-71xx
-Conflicts:	xorg-x11-drv-nvidia-96xx
-Conflicts:	xorg-x11-drv-nvidia-173xx
-Conflicts:	xorg-x11-drv-nvidia-304xx
-Conflicts:	xorg-x11-drv-nvidia-340xx
-Conflicts:	xorg-x11-drv-nvidia-367xx
-
 %description
 This package provides the proprietary NVIDIA OpenGL X11 display driver files.
 
@@ -174,7 +145,7 @@ pushd nvidiapkg
 %{__ln_s} libGLESv2_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libGLESv2_nvidia.so.2
 %{__ln_s} libGLX_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libGLX_nvidia.so.0
 # Workaround buggy mesa
-%{__ln_s} %{_libdir}/libGLX_nvidia.so.0 $RPM_BUILD_ROOT%{_libdir}/libGLX_indirect.so.0
+%{__ln_s} libGLX_nvidia.so.0 $RPM_BUILD_ROOT%{_libdir}/libGLX_indirect.so.0
 # Added libnvcuvid.so in 260.xx series driver
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvcuvid.so
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvcuvid.so.1
@@ -229,7 +200,7 @@ desktop-file-install \
 # added in 340.24
 %{__install} -p -m 0644 nvidia-application-profiles-%{version}-key-documentation $RPM_BUILD_ROOT%{_datadir}/nvidia/
 
-# Install the Xorg conf files
+# Install the Xorg conf file
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/X11/
 %{__install} -p -m 0644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/X11/nvidia-xorg.conf
 
