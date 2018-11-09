@@ -21,12 +21,7 @@ NoSource: 0
 
 Source1:	nvidia-xorg.conf
 
-# Provides for CUDA
-Provides:	cuda-driver = %{version}
-Provides:	cuda-drivers = %{version}
-Provides:	nvidia-drivers = %{version}
-
-# provides desktop-file-install
+# for desktop-file-install
 BuildRequires:	desktop-file-utils
 BuildRequires:	perl
 
@@ -213,7 +208,7 @@ popd
 if [ "$1" -eq "1" ]; then # new install
     # Check if xorg.conf exists, if it does, backup and remove [BugID # 0000127]
     [ -f %{_sysconfdir}/X11/xorg.conf ] && \
-      mv %{_sysconfdir}/X11/xorg.conf %{_sysconfdir}/X11/pre-nvidia.xorg.conf.elreposave &>/dev/null
+      mv %{_sysconfdir}/X11/xorg.conf %{_sysconfdir}/X11/pre-nvidia.xorg.conf &>/dev/null
     # xorg.conf now shouldn't exist so copy new one
     [ ! -f %{_sysconfdir}/X11/xorg.conf ] && \
       cp -p %{_sysconfdir}/X11/nvidia-xorg.conf %{_sysconfdir}/X11/xorg.conf &>/dev/null
@@ -268,7 +263,7 @@ fi || :
 %{_libdir}/lib*
 %{_libdir}/vdpau/libvdpau_nvidia.*
 %{_libdir}/xorg/modules/drivers/nvidia_drv.so
-%{_libdir}/xorg/modules/extensions/libglxserver_nvidia.*
+%{_libdir}/xorg/modules/extensions/libglxserver_nvidia.so
 
 %changelog
 * Fri Nov  2 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-3.el7.ml
