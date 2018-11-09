@@ -12,7 +12,6 @@ License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
 URL:		http://www.nvidia.com/
 
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-build-%(%{__id_u} -n)
 ExclusiveArch:	x86_64
 
 # Sources.
