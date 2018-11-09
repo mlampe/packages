@@ -17,7 +17,7 @@ URL:		http://www.nvidia.com/
 ExclusiveArch:	x86_64
 
 # Sources.
-Source0:	ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}.run
+Source0:	https://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}.run
 NoSource: 0
 
 Source1:	nvidia-xorg.conf
