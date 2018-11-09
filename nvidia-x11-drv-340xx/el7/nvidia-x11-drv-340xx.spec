@@ -1,6 +1,4 @@
 # Define the Max Xorg version (ABI) that this driver release supports
-# See README.txt, Chapter 2. Minimum Software Requirements or
-# ftp://download.nvidia.com/XFree86/Linux-x86_64/340.106/README/minimumrequirements.html
 %define		max_xorg_ver	1.20.99
 
 %define		nvidialibdir	%{_libdir}/nvidia
@@ -16,7 +14,6 @@ License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
 URL:		http://www.nvidia.com/
 
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-build-%(%{__id_u} -n)
 ExclusiveArch:	x86_64
 
 # Sources.
@@ -26,14 +23,8 @@ NoSource: 0
 Source1:	nvidia-xorg.conf
 Source2:	99-nvidia.conf
 Source3:	nvidia.ld.so.conf
-Source4:	alternate-install-present
 
-# Provides for CUDA
-Provides:	cuda-driver = %{version}
-Provides:	cuda-drivers = %{version}
-Provides:	nvidia-drivers = %{version}
-
-# provides desktop-file-install
+# for desktop-file-install
 BuildRequires:	desktop-file-utils
 BuildRequires:	perl
 
@@ -48,28 +39,6 @@ Requires(post):	 dracut
 
 Requires(post):	 grubby
 Requires(preun): grubby
-
-# elrepo
-Conflicts:	nvidia-x11-drv
-Conflicts:	nvidia-x11-drv-32bit
-Conflicts:	nvidia-x11-drv-304xx
-Conflicts:	nvidia-x11-drv-304xx-32bit
-Conflicts:	nvidia-x11-drv-173xx
-Conflicts:	nvidia-x11-drv-173xx-32bit
-Conflicts:	nvidia-x11-drv-96xx
-Conflicts:	nvidia-x11-drv-96xx-32bit
-
-# rpmforge
-Conflicts:	dkms-nvidia
-Conflicts:	dkms-nvidia-x11-drv
-Conflicts:	dkms-nvidia-x11-drv-32bit
-
-Conflicts:	xorg-x11-drv-nvidia
-Conflicts:	xorg-x11-drv-nvidia-beta
-Conflicts:	xorg-x11-drv-nvidia-legacy
-Conflicts:	xorg-x11-drv-nvidia-71xx
-Conflicts:	xorg-x11-drv-nvidia-96xx
-Conflicts:	xorg-x11-drv-nvidia-173xx
 
 %description
 This package provides the proprietary NVIDIA OpenGL X11 display driver files.
@@ -144,7 +113,7 @@ pushd nvidiapkg
 %{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/drivers/
 %{__mkdir_p} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/nvidia/
 %{__install} -p -m 0755 nvidia_drv.so $RPM_BUILD_ROOT%{_libdir}/xorg/modules/drivers/
-%{__install} -p -m 0755 libglx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/nvidia/
+%{__install} -p -m 0755 libglx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/nvidia/libglx.so
 
 # Create the symlinks
 %{__ln_s} libcuda.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libcuda.so
@@ -174,7 +143,6 @@ pushd nvidiapkg
 # %{__ln_s} libnvidia-vgxcfg.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-vgxcfg.so.1
 # Added libnvidia-opencl.so in 304.xx series driver
 %{__ln_s} libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-opencl.so.1
-%{__ln_s} libglx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/nvidia/libglx.so
 %{__ln_s} libvdpau_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_nvidia.so.1
 
 # Install man pages
@@ -216,28 +184,17 @@ desktop-file-install \
 # Install ld.so.conf.d file
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/
 %{__install} -p -m 0644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/nvidia.conf
-# Install alternate-install-present file
-# This file tells the NVIDIA installer that a packaged version of the driver is already present on the system
-%{__install} -p -m 0644 %{SOURCE4} $RPM_BUILD_ROOT%{nvidialibdir}/alternate-install-present
 
 popd
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
-%pre
-# Warn on libglamoregl
-if [ -e /usr/share/X11/xorg.conf.d/glamor.conf ]; then
-    echo "WARNING: libglamoregl conflicts with NVIDIA drivers"
-    echo "         Disable glamoregl or uninstall xorg-x11-glamor"
-    echo "         See: http://elrepo.org/tiki/kmod-nvidia (Known Issues) for more information"
-fi
-
 %post
 if [ "$1" -eq "1" ]; then # new install
     # Check if xorg.conf exists, if it does, backup and remove [BugID # 0000127]
     [ -f %{_sysconfdir}/X11/xorg.conf ] && \
-      mv %{_sysconfdir}/X11/xorg.conf %{_sysconfdir}/X11/pre-nvidia.xorg.conf.elreposave &>/dev/null
+      mv %{_sysconfdir}/X11/xorg.conf %{_sysconfdir}/X11/pre-nvidia.xorg.conf &>/dev/null
     # xorg.conf now shouldn't exist so copy new one
     [ ! -f %{_sysconfdir}/X11/xorg.conf ] && \
       cp -p %{_sysconfdir}/X11/nvidia-xorg.conf %{_sysconfdir}/X11/xorg.conf &>/dev/null
@@ -294,7 +251,8 @@ fi ||:
 %doc nvidiapkg/html/*
 %{_mandir}/man1/nvidia*.*
 %{_datadir}/pixmaps/nvidia-settings.png
-%{_datadir}/applications/*nvidia-settings.desktop
+%{_datadir}/applications/nvidia-settings.desktop
+%dir %{_datadir}/nvidia
 %{_datadir}/nvidia/nvidia-application-profiles-*
 %{_bindir}/nvidia-bug-report.sh
 %{_bindir}/nvidia-cuda-mps-control
@@ -312,11 +270,10 @@ fi ||:
 # now the libs
 %dir %{nvidialibdir}
 %{nvidialibdir}/lib*
-%{nvidialibdir}/alternate-install*
 %{_libdir}/vdpau/libvdpau_nvidia.*
 %{_libdir}/xorg/modules/drivers/nvidia_drv.so
 %dir %{_libdir}/xorg/modules/extensions/nvidia
-%{_libdir}/xorg/modules/extensions/nvidia/libglx.*
+%{_libdir}/xorg/modules/extensions/nvidia/libglx.so
 
 %changelog
 * Thu Jun 07 2018 Michael Lampe <mlampe0@googlemail.com> - 340.107-1
