@@ -177,6 +177,7 @@ pushd nvidiapkg
 %{__ln_s} libnvidia-ml.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ml.so.1
 # Added libnvidia-opencl.so in 304.xx series driver
 %{__ln_s} libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-opencl.so.1
+%{__ln_s} libnvidia-ptxjitcompiler.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ptxjitcompiler.so.1
 # Added libnvoptix.so in 410.57 beta drivers
 %{__ln_s} libnvoptix.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvoptix.so.1
 %{__ln_s} libvdpau_nvidia.so.%{version} $RPM_BUILD_ROOT%{_libdir}/vdpau/libvdpau_nvidia.so.1
