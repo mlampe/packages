@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 3.10.0-862.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 410.73
+Version: 410.78
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -64,6 +64,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Nov 15 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-1
+- Updated to version 410.78
+
 * Fri Oct 26 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-1
 - Updated to version 410.73
 

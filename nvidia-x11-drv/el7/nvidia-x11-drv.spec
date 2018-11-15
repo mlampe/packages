@@ -5,8 +5,8 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	410.73
-Release:	3%{?dist}
+Version:	410.78
+Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -265,6 +265,9 @@ fi || :
 %{_libdir}/xorg/modules/extensions/libglxserver_nvidia.so
 
 %changelog
+* Thu Nov 15 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-1.el7.ml
+- Updated to version 410.78
+
 * Fri Nov  2 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-3.el7.ml
 - Add libGLX_indirect.so.0 -> libGLX_nvidia.so.0 to workaround Mesa bugs
 

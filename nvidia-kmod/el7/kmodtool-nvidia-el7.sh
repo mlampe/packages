@@ -154,7 +154,6 @@ get_rpmtemplate ()
 Provides:         kernel-modules >= ${verrel_dep}${dotvariant}
 Provides:         ${kmod_name}-kmod = %{?epoch:%{epoch}:}%{version}-%{release}
 Provides:         ${kmod_name}-kmod%{_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
-Provides:         ${kmod_name}-uvm-kmod = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires:         kernel >= 3.10.0-693.el7
 Requires(post):   /usr/sbin/depmod
 Requires(postun): /usr/sbin/depmod
