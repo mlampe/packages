@@ -7,8 +7,8 @@
 %define		_use_internal_dependency_generator	0
 
 Name:		nvidia-x11-drv
-Version:	410.73
-Release:	2%{?dist}
+Version:	410.78
+Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -177,6 +177,7 @@ pushd nvidiapkg
 %{__ln_s} libnvidia-ml.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ml.so.1
 # Added libnvidia-opencl.so in 304.xx series driver
 %{__ln_s} libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-opencl.so.1
+# Added libnvidia-ptxjitcompiler.so in 361.28 driver
 %{__ln_s} libnvidia-ptxjitcompiler.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ptxjitcompiler.so.1
 # Added libnvoptix.so in 410.57 beta drivers
 %{__ln_s} libnvoptix.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvoptix.so.1
@@ -332,6 +333,9 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/libglxserver_nvidia.so
 
 %changelog
+* Thu Nov 15 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-1.el6.ml
+- Updated to 410.78
+
 * Fri Nov  9 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-2.el6.ml
 - Package new libs from 410 series
 
