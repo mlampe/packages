@@ -2,11 +2,11 @@
 %define kmod_name nvidia-340xx
 
 # If kversion isn't defined on the rpmbuild line, define it here.
-%{!?kversion: %define kversion 3.10.0-862.el7.%{_target_cpu}}
+%{!?kversion: %define kversion 3.10.0-957.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
 Version: 340.107
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
 Summary: NVIDIA OpenGL kernel driver module
@@ -79,6 +79,9 @@ done
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Mon Nov 19 2018 Michael Lampe <mlampe0@googlemail.com> - 340.107-2
+- Rebuilt for 7.6 kernel
+
 * Thu Jun 07 2018 Michael Lampe <mlampe0@googlemail.com> - 340.107-1
 - Updated to version 340.107
 
