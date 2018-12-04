@@ -1,8 +1,11 @@
 # Define the Max Xorg version (ABI) that this driver release supports
-%define		max_xorg_ver	1.20.99
+%global		max_xorg_ver	1.20.99
 
-%define		debug_package	%{nil}
-%define		_use_internal_dependency_generator	0
+%global		debug_package	%{nil}
+
+%filter_from_provides /.*_nvidia.*/d; /libnvidia-[a-e].*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /libnvoptix.*/d; /nvidia_drv.*/g
+%filter_from_requires /.*_nvidia.*/d; /libnvidia-[a-e].*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /libnvoptix.*/d; /nvidia_drv.*/g
+%filter_setup
 
 Name:		nvidia-x11-drv
 Version:	410.78
