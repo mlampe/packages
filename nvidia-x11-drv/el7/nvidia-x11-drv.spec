@@ -3,8 +3,8 @@
 
 %global		debug_package	%{nil}
 
-%filter_from_provides /.*_nvidia.*/d; /libnvidia-[a-e].*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /libnvoptix.*/d; /nvidia_drv.*/g
-%filter_from_requires /.*_nvidia.*/d; /libnvidia-[a-e].*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /libnvoptix.*/d; /nvidia_drv.*/g
+%filter_from_provides /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /libnvoptix.*/d; /nvidia_drv.*/g
+%filter_from_requires /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /libnvoptix.*/d; /nvidia_drv.*/g
 %filter_setup
 
 Name:		nvidia-x11-drv
