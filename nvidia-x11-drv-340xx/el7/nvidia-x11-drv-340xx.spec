@@ -1,10 +1,13 @@
 # Define the Max Xorg version (ABI) that this driver release supports
-%define		max_xorg_ver	1.20.99
+%global		max_xorg_ver	1.20.99
 
-%define		nvidialibdir	%{_libdir}/nvidia
-%define		nvidialib32dir	%{_prefix}/lib/nvidia
+%global		nvidialibdir	%{_libdir}/nvidia
 
-%define		debug_package	%{nil}
+%global		debug_package	%{nil}
+
+%filter_from_provides /lib.*GL\..*/d; /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /nvidia_drv.*/d; /libglx.*/d
+%filter_from_requires /lib.*GL\..*/d; /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /nvidia_drv.*/d; /libglx.*/d
+%filter_setup
 
 Name:		nvidia-x11-drv-340xx
 Version:	340.107
@@ -29,6 +32,7 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	perl
 
 Requires:	perl
+Requires:       opencl-filesystem
 Requires:	xorg-x11-server-Xorg <= %{max_xorg_ver}
 Requires:	nvidia-340xx-kmod = %{?epoch:%{epoch}:}%{version}
 Requires(post):	nvidia-340xx-kmod = %{?epoch:%{epoch}:}%{version}
