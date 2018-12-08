@@ -274,9 +274,6 @@ fi || :
 * Thu Nov 15 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-1.el7.ml
 - Updated to version 410.78
 
-* Fri Nov  2 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-3.el7.ml
-- Add libGLX_indirect.so.0 -> libGLX_nvidia.so.0 to workaround Mesa bugs
-
 * Tue Oct 30 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-2.el7.ml
 - Adapted to libglvnd support in RHEL 7.6
 
