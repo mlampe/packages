@@ -41,6 +41,7 @@ BuildRequires:	perl
 
 Requires:	opencl-filesystem
 Requires:	libvdpau
+Requires:	ConsoleKit
 Requires:	xorg-x11-server-Xorg <= %{max_xorg_ver}
 Requires:	nvidia-kmod = %{?epoch:%{epoch}:}%{version}
 Requires(post):	nvidia-kmod = %{?epoch:%{epoch}:}%{version}
@@ -311,6 +312,8 @@ fi ||:
 %{_mandir}/man1/nvidia*.*
 %{_datadir}/pixmaps/nvidia-settings.png
 %{_datadir}/applications/nvidia-settings.desktop
+%dir %{_datadir}/glvnd
+%dir %{_datadir}/glvnd/egl_vendor.d
 %{_datadir}/glvnd/egl_vendor.d/10_nvidia.json
 %dir %{_datadir}/nvidia
 %{_datadir}/nvidia/nvidia-application-profiles-*
