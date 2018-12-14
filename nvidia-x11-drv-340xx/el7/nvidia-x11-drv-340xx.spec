@@ -32,7 +32,8 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	perl
 
 Requires:	perl
-Requires:       opencl-filesystem
+Requires:	mesa-filesystem
+Requires:	opencl-filesystem
 Requires:	xorg-x11-server-Xorg <= %{max_xorg_ver}
 Requires:	nvidia-340xx-kmod = %{?epoch:%{epoch}:}%{version}
 Requires(post):	nvidia-340xx-kmod = %{?epoch:%{epoch}:}%{version}
