@@ -39,7 +39,8 @@ BuildRequires:  libacl-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	perl
 
-Requires:       opencl-filesystem
+Requires:	opencl-filesystem
+Requires:	libvdpau
 Requires:	xorg-x11-server-Xorg <= %{max_xorg_ver}
 Requires:	nvidia-kmod = %{?epoch:%{epoch}:}%{version}
 Requires(post):	nvidia-kmod = %{?epoch:%{epoch}:}%{version}
