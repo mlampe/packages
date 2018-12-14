@@ -5,8 +5,8 @@
 
 %global		debug_package	%{nil}
 
-%filter_from_provides /lib.*GL\..*/d; /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /nvidia_drv.*/d; /libglx.*/d
-%filter_from_requires /lib.*GL\..*/d; /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /nvidia_drv.*/d; /libglx.*/d
+%filter_from_provides /lib.*GL.*/d; /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /nvidia_drv.*/d; /libglx.*/d
+%filter_from_requires /lib.*GL.*/d; /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-[o-z].*/d; /nvidia_drv.*/d; /libglx.*/d
 %filter_setup
 
 Name:		nvidia-x11-drv-340xx
