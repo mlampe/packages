@@ -11,7 +11,7 @@
 
 Name:		nvidia-x11-drv
 Version:	410.78
-Release:	1%{?dist}
+Release:	2%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -26,14 +26,6 @@ NoSource: 1
 
 Source2:	nvidia-config-display
 Source3:	blacklist-nouveau.conf
-Source4:	nvidia.nodes
-Source6:	nvidia.modprobe
-Source7:	02nvidia
-Source8:	nvidia_ck.tar.gz
-
-# buildrequires for nvidia.ck
-BuildRequires:  glib-devel
-BuildRequires:  libacl-devel
 
 # for desktop-file-install
 BuildRequires:	desktop-file-utils
@@ -41,7 +33,6 @@ BuildRequires:	perl
 
 Requires:	opencl-filesystem
 Requires:	libvdpau
-Requires:	ConsoleKit
 Requires:	xorg-x11-server-Xorg <= %{max_xorg_ver}
 Requires:	nvidia-kmod = %{?epoch:%{epoch}:}%{version}
 Requires(post):	nvidia-kmod = %{?epoch:%{epoch}:}%{version}
@@ -59,8 +50,7 @@ Requires(preun): grubby
 This package provides the proprietary NVIDIA OpenGL X11 display driver files.
 
 %prep
-%setup -a8 -q -c -T
-
+%setup -q -c -T
 sh %{SOURCE1} --extract-only --target nvidiapkg
 
 # Lets just take care of all the docs here rather than during install
@@ -71,11 +61,9 @@ popd
 find nvidiapkg/html/ -type f | xargs chmod 0644
 
 %build
-%{__make}
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 pushd nvidiapkg
 
@@ -85,6 +73,7 @@ pushd nvidiapkg
 %{__install} -p -m 0755 nvidia-cuda-mps-control $RPM_BUILD_ROOT%{_bindir}/
 %{__install} -p -m 0755 nvidia-cuda-mps-server $RPM_BUILD_ROOT%{_bindir}/
 %{__install} -p -m 0755 nvidia-debugdump $RPM_BUILD_ROOT%{_bindir}/
+%{__install} -p -m 0755 nvidia-modprobe $RPM_BUILD_ROOT%{_bindir}/
 %{__install} -p -m 0755 nvidia-persistenced $RPM_BUILD_ROOT%{_bindir}/
 %{__install} -p -m 0755 nvidia-settings $RPM_BUILD_ROOT%{_bindir}/
 %{__install} -p -m 0755 nvidia-smi $RPM_BUILD_ROOT%{_bindir}/
@@ -229,16 +218,6 @@ desktop-file-install \
 # Blacklist the nouveau driver
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/modprobe.d/
 %{__install} -p -m 0644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/modprobe.d/blacklist-nouveau.conf
-# Install nvidia.modprobe
-%{__install} -p -m 0644 %{SOURCE6} $RPM_BUILD_ROOT%{_sysconfdir}/modprobe.d/nvidia.conf
-
-# Install udev configuration file
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/udev/makedev.d/
-%{__install} -p -m 0644 %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/udev/makedev.d/60-nvidia.nodes
-
-# Override makedev rule
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/makedev.d/
-%{__install} -p -m 0644 %{SOURCE7} $RPM_BUILD_ROOT%{_sysconfdir}/makedev.d/
 
 # Install ld.so.conf.d file
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/
@@ -321,17 +300,14 @@ fi ||:
 %{_bindir}/nvidia-cuda-mps-control
 %{_bindir}/nvidia-cuda-mps-server
 %{_bindir}/nvidia-debugdump
+%attr(4755, root, root) %{_bindir}/nvidia-modprobe
 %{_bindir}/nvidia-persistenced
 %{_bindir}/nvidia-settings
 %{_bindir}/nvidia-smi
 %{_bindir}/nvidia-xconfig
 %{_sbindir}/nvidia-config-display
-%{_prefix}/lib/ConsoleKit/run-seat.d/nvidia.ck
 %config(noreplace) %{_sysconfdir}/modprobe.d/blacklist-nouveau.conf
-%config(noreplace) %{_sysconfdir}/modprobe.d/nvidia.conf
-%config(noreplace) %{_sysconfdir}/makedev.d/02nvidia
 %config %{_sysconfdir}/ld.so.conf.d/nvidia.conf
-%config %{_sysconfdir}/udev/makedev.d/60-nvidia.nodes
 %config %{_sysconfdir}/profile.d/nvidia.*sh
 %{_sysconfdir}/OpenCL/vendors/nvidia.icd
 
@@ -343,6 +319,10 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/libglxserver_nvidia.so
 
 %changelog
+* Fri Dec 28 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-2.el6.ml
+- Remove distro conformant handling of device nodes and access rights
+- Package Nvidia's sledgehammer 'nvidia-modprobe' instead
+
 * Thu Nov 15 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-1.el6.ml
 - Updated to 410.78
 
