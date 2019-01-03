@@ -320,6 +320,7 @@ fi ||:
 
 %changelog
 * Thu Jan  3 2019 Michael Lampe <mlampe0@googlemail.com> - 410.93-1.el6.ml
+- Updated to 410.93
 
 * Fri Dec 28 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-2.el6.ml
 - Remove distro conformant handling of device nodes and access rights
