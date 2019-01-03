@@ -5,8 +5,8 @@
 %{!?kversion: %define kversion 3.10.0-957.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 410.78
-Release: 2%{?dist}
+Version: 410.93
+Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
 Summary: NVIDIA OpenGL kernel driver module
@@ -64,6 +64,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Jan  3 2019 Michael Lampe <mlampe0@googlemail.com> - 410.93-1.el7.ml
+- Updated to version 410.93
+
 * Fri Nov 16 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-2
 - Rebuild for 7.6 kernel
 
@@ -73,174 +76,5 @@ popd
 * Fri Oct 26 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-1
 - Updated to version 410.73
 
-* Wed Oct 17 2018 Michael Lampe <mlampe0@googlemail.com> - 410.66-1
-- Updated to version 410.66
-
-* Tue Aug 21 2018 Michael Lampe <mlampe0@googlemail.com> - 396.54-1
-- Updated to version 396.54
-
-* Sat Aug  4 2018 Michael Lampe <mlampe0@googlemail.com> - 396.51-1
-- Updated to version 396.51
-
-* Fri Jul 27 2018 Michael Lampe <mlampe0@googlemail.com> - 396.45-1
-- Updated to version 396.45
-
-* Tue Jul 17 2018 Michael Lampe <mlampe0@googlemail.com> - 390.77-1
-- Updated to version 390.77
-
-* Tue Jun  5 2018 Michael Lampe <mlampe0@googlemail.com> - 390.67-1
-- Updated to version 390.67
-
-* Thu May 17 2018 Michael Lampe <mlampe0@googlemail.com> - 390.59-1
-- Updated to version 390.59
-
-* Thu Apr 26 2018 Michael Lampe <mlampe0@googlemail.com> - 390.48-2
-- rebuild for 7.5 kernel
-
-* Fri Mar 30 2018 Michael Lampe <mlampe0@googlemail.com> - 390.48-1
-- Updated to version 390.48
-
-* Fri Mar 16 2018 Michael Lampe <mlampe0@googlemail.com> - 390.42-2
-- rebuilt for retpoline
-
-* Tue Mar 13 2018 Michael Lampe <mlampe0@googlemail.com> - 390.42-1
-- Updated to version 390.42
-
-* Mon Jan 29 2018 Michael Lampe <mlampe0@googlemail.com> - 390.25-1
-- Updated to version 390.25
-
-* Sat Jan  6 2018 Michael Lampe <mlampe0@googlemail.com> - 385.111-1
-- Updated to version 384.111
-
-* Sun Dec 10 2017 Michael Lampe <mlampe0@googlemail.com> - 385.98-2
-- Removed some stuff I don't need
-
-* Fri Nov 03 2017 Philip J Perry <phil@elrepo.org> - 384.98-1
-- Updated to version 384.98
-
-* Sat Sep 23 2017 Philip J Perry <phil@elrepo.org> - 384.90-1
-- Updated to version 384.90
-
-* Sat Sep 02 2017 Akemi Yagi <toracat@elrepo.org> - 384.69-1
-- Updated to version 384.69
-
-* Thu Aug 31 2017 Akemi Yagi <toracat@elrepo.org> - 384.66-1
-- Updated to version 384.66
-
-* Tue Aug 01 2017 Philip J Perry <phil@elrepo.org> - 384.59-2
-- Rebuilt against RHEL 7.4 kernel
-
-* Tue Jul 25 2017 Philip J Perry <phil@elrepo.org> - 384.59-1
-- Updated to version 384.59
-- Reinstate support for GRID K520
-
-* Wed May 10 2017 Philip J Perry <phil@elrepo.org> - 375.66-1
-- Updated to version 375.66
-- Blacklist GRID K1/K2/K340/K520 based devices no longer
-  supported by the 375.xx driver
-  [https://elrepo.org/bugs/view.php?id=724]
-- Add provides for better compatibility with CUDA
-  [http://elrepo.org/bugs/view.php?id=735]
-
-* Fri Mar 03 2017 Philip J Perry <phil@elrepo.org> - 375.39-2
-- Rebuilt against kernel-3.10.0-514.10.2.el7 for kABI breakage
-
-* Wed Feb 22 2017 Philip J Perry <phil@elrepo.org> - 375.39-1
-- Updated to version 375.39
-
-* Thu Dec 15 2016 Philip J Perry <phil@elrepo.org> - 375.26-1
-- Updated to version 375.26
-
-* Sat Nov 19 2016 Philip J Perry <phil@elrepo.org> - 375.20-1
-- Updated to version 375.20
-
-* Thu Nov 03 2016 Philip J Perry <phil@elrepo.org> - 367.57-2
-- Rebuilt against RHEL 7.3 kernel
-
-* Tue Oct 11 2016 Philip J Perry <phil@elrepo.org> - 367.57-1
-- Updated to version 367.57
-
-* Sat Aug 27 2016 Philip J Perry <phil@elrepo.org> - 367.44-1
-- Updated to version 367.44
-
-* Sat Jul 16 2016 Philip J Perry <phil@elrepo.org> - 367.35-1
-- Updated to version 367.35
-
-* Tue Jun 14 2016 Philip J Perry <phil@elrepo.org> - 367.27-1
-- Updated to version 367.27
-- Adds nvidia-drm kernel module
-
-* Wed May 25 2016 Philip J Perry <phil@elrepo.org> - 361.45.11-1
-- Updated to version 361.45.11
-
-* Thu Mar 31 2016 Philip J Perry <phil@elrepo.org> - 361.42-1
-- Updated to version 361.42
-
-* Tue Mar 01 2016 Philip J Perry <phil@elrepo.org> - 361.28-1
-- Updated to version 361.28
-- Adds nvidia-modeset kernel module
-
-* Sun Jan 31 2016 Philip J Perry <phil@elrepo.org> - 352.79-1
-- Updated to version 352.79
-
-* Fri Nov 20 2015 Philip J Perry <phil@elrepo.org> - 352.63-1
-- Updated to version 352.63
-- Rebuilt against RHEL 7.2 kernel
-
-* Sat Oct 17 2015 Philip J Perry <phil@elrepo.org> - 352.55-1
-- Updated to version 352.55
-
-* Sat Aug 29 2015 Philip J Perry <phil@elrepo.org> - 352.41-1
-- Updated to version 352.41
-
-* Sat Aug 01 2015 Philip J Perry <phil@elrepo.org> - 352.30-1
-- Updated to version 352.30
-
-* Fri Jul 03 2015 Philip J Perry <phil@elrepo.org> - 352.21-3
-- Add blacklist() provides.
-- Revert modalias() provides.
-
-* Wed Jul 01 2015 Philip J Perry <phil@elrepo.org> - 352.21-2
-- Add modalias() provides.
-
-* Wed Jun 17 2015 Philip J Perry <phil@elrepo.org> - 352.21-1
-- Updated to version 352.21
-
-* Wed Apr 08 2015 Philip J Perry <phil@elrepo.org> - 346.59-1
-- Updated to version 346.59
-
-* Thu Mar 05 2015 Philip J Perry <phil@elrepo.org> - 346.47-2
-- Rebuilt against RHEL 7.1 kernel
-
-* Wed Feb 25 2015 Philip J Perry <phil@elrepo.org> - 346.47-1
-- Updated to version 346.47
-
-* Sat Jan 17 2015 Philip J Perry <phil@elrepo.org> - 346.35-1
-- Updated to version 346.35
-- Drops support of older G8x, G9x, and GT2xx GPUs
-- Drops support for UVM on 32-bit architectures
-
-* Fri Dec 12 2014 Philip J Perry <phil@elrepo.org> - 340.65-1
-- Updated to version 340.65
-
-* Thu Nov 06 2014 Philip J Perry <phil@elrepo.org> - 340.58-1
-- Updated to version 340.58
-
-* Sat Oct 04 2014 Philip J Perry <phil@elrepo.org> - 340.46-1
-- Updated to version 340.46
-
-* Sat Aug 16 2014 Philip J Perry <phil@elrepo.org> - 340.32-1
-- Updated to version 340.32
-
-* Wed Jul 09 2014 Philip J Perry <phil@elrepo.org> - 340.24-1
-- Updated to version 340.24
-- Enabled Secure Boot
-
-* Sat Jul 05 2014 Philip J Perry <phil@elrepo.org> - 331.89-1
-- Updated to version 331.89
-
-* Tue Jun 10 2014 Philip J Perry <phil@elrepo.org> - 331.79-2
-- Rebuilt for rhel-7.0 release
-
-* Wed May 21 2014 Philip J Perry <phil@elrepo.org> - 331.79-1
-- Initial el7 build of the nvidia kmod package.
+* Wed Oct 17 2018 Michael Lampe <mlampe0@googlemail.com> - 410.66-1.el7.ml
+- Resynced with elrepo
