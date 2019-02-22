@@ -10,8 +10,8 @@
 %filter_setup
 
 Name:		nvidia-x11-drv
-Version:	410.78
-Release:	2%{?dist}
+Version:	410.93
+Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
 Summary:	NVIDIA OpenGL X11 display driver files
@@ -319,6 +319,9 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/libglxserver_nvidia.so
 
 %changelog
+* Thu Jan  3 2019 Michael Lampe <mlampe0@googlemail.com> - 410.93-1.el6.ml
+- Updated to 410.93
+
 * Fri Dec 28 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-2.el6.ml
 - Remove distro conformant handling of device nodes and access rights
 - Package Nvidia's sledgehammer 'nvidia-modprobe' instead
@@ -334,48 +337,3 @@ fi ||:
 
 * Wed Oct 17 2018 Michael Lampe <mlampe0@googlemail.com> - 410.66-1.el6.ml
 - Updated to 410.66
-
-* Tue Aug 21 2018 Michael Lampe <mlampe0@googlemail.com> - 396.54-1.el6.ml
-- Updated to version 396.54
-
-* Sat Aug  4 2018 Michael Lampe <mlampe0@googlemail.com> - 396.51-1.el6.ml
-- Updated to version 396.51
-
-* Thu Jul 19 2018 Michael Lampe <mlampe0@googlemail.com> - 396.45-1.el6.ml
-- Updated to version 396.45
-
-* Tue Jul 17 2018 Michael Lampe <mlampe0@googlemail.com> - 390.77-1.el6.ml
-- Updated to version 390.77
-
-* Wed Jun  6 2018 Michael Lampe <mlampe0@googlemail.com> - 390.67-1.el6.ml
-- Updated to version 390.67
-
-* Thu May 17 2018 Michael Lampe <mlampe0@googlemail.com> - 390.59-1.el6.ml
-- Updated to version 390.59
-
-* Fri Mar 30 2018 Michael Lampe <mlampe0@googlemail.com> - 390.48-1.el6.ml
-- Updated to version 390.48
-
-* Tue Mar 13 2018 Michael Lampe <mlampe0@googlemail.com> - 390.42-1.el6.ml
-- Updated to version 390.42
-
-* Sat Feb  3 2018 Michael Lampe <mlampe0@googlemail.com> - 390.25-2.el6.ml
-- add /dev/nvidia-uvm-tools
-
-* Mon Jan 29 2018 Michael Lampe <mlampe0@googlemail.com> - 390.25-1.el6.ml
-- Updated to version 390.25
-
-* Sat Jan  6 2018 Michael Lampe <mlampe0@googlemail.com> - 384.111-1.el6.ml
-- Updated to version 384.111
-
-* Sat Nov  4 2017 Michael Lampe <mlampe0@googlemail.com> - 384.98-1.el6.ml
-- Updated to version 384.98
-
-* Wed Sep 27 2017 Michael Lampe <mlampe0@googlemail.com> - 384.90-1.el6.ml
-- Updated to version 384.90
-
-* Mon Aug 28 2017 Michael Lampe <mlampe0@googlemail.com> - 384.69-2.el6.ml
-- Install only one libnvidia-tls.so
-
-* Wed Aug 23 2017 Michael Lampe <mlampe0@googlemail.com> - 384.69-1.el6.ml
-- Resynced with elrepo
