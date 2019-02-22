@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 3.10.0-957.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 410.93
+Version: 418.43
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -64,16 +64,19 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Fri Feb 22 2019 Michael Lampe <mlampe0@googlemail.com> - 418.43-1.el7.ml
+- Updated to version 418.43
+
 * Thu Jan  3 2019 Michael Lampe <mlampe0@googlemail.com> - 410.93-1.el7.ml
 - Updated to version 410.93
 
-* Fri Nov 16 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-2
+* Fri Nov 16 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-2.el7.ml
 - Rebuild for 7.6 kernel
 
-* Thu Nov 15 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-1
+* Thu Nov 15 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-1.el7.ml
 - Updated to version 410.78
 
-* Fri Oct 26 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-1
+* Fri Oct 26 2018 Michael Lampe <mlampe0@googlemail.com> - 410.73-1.el7.ml
 - Updated to version 410.73
 
 * Wed Oct 17 2018 Michael Lampe <mlampe0@googlemail.com> - 410.66-1.el7.ml
