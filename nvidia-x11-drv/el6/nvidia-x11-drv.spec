@@ -5,8 +5,8 @@
 
 %global		debug_package	%{nil}
 
-%filter_from_provides /libGL\..*/d; /libGLdisp.*/d; /libEGL\..*/d; /libnv.*/d; /.*_nvidia.*/d; /nvidia_.*/d;
-%filter_from_requires /libGL\..*/d; /libGLdisp.*/d; /libEGL\..*/d; /libnv.*/d; /.*_nvidia.*/d; /nvidia_.*/d;
+%filter_from_provides /libGL\..*/d; /libGLdisp.*/d; /libEGL\..*/d; /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-ope.*/d; /libnvidia-[p-z].*/d; /libnvoptix.*/d; /nvidia_drv.*/d
+%filter_from_requires /libGL\..*/d; /libGLdisp.*/d; /libEGL\..*/d; /.*_nvidia.*/d; /libnvidia-[a-c].*/d; /libnvidia-egl.*/d; /libnvidia-fat.*/d; /libnvidia-g.*/d; /libnvidia-ope.*/d; /libnvidia-[p-z].*/d; /libnvoptix.*/d; /nvidia_drv.*/d
 %filter_setup
 
 Name:		nvidia-x11-drv
@@ -159,19 +159,25 @@ pushd nvidiapkg
 %{__ln_s} libGLX_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libGLX_nvidia.so.0
 %{__ln_s} libOpenGL.so.0 $RPM_BUILD_ROOT%{nvidialibdir}/libOpenGL.so
 # Added libnvcuvid.so in 260.xx series driver
+%{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvcuvid.so
 %{__ln_s} libnvcuvid.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvcuvid.so.1
 %{__ln_s} libnvidia-cfg.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-cfg.so.1
 # Added libnvidia-encode.so in 310.19 driver
+%{__ln_s} libnvidia-encode.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-encode.so
 %{__ln_s} libnvidia-encode.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-encode.so.1
 # Added libnvidia-fbc.so in 331.20 driver
+%{__ln_s} libnvidia-fbc.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-fbc.so
 %{__ln_s} libnvidia-fbc.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-fbc.so.1
 # Added libnvidia-ifr.so in 325.15 driver
+%{__ln_s} libnvidia-ifr.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ifr.so
 %{__ln_s} libnvidia-ifr.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ifr.so.1
 # Added libnvidia-ml.so in 270.xx series driver
+%{__ln_s} libnvidia-ml.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ml.so
 %{__ln_s} libnvidia-ml.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ml.so.1
 # Added libnvidia-opencl.so in 304.xx series driver
 %{__ln_s} libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-opencl.so.1
 # Added libnvidia-opticalflow.so in 418.43 driver
+%{__ln_s} libnvidia-opticalflow.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-opticalflow.so
 %{__ln_s} libnvidia-opticalflow.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-opticalflow.so.1
 # Added libnvidia-ptxjitcompiler.so in 361.28 driver
 %{__ln_s} libnvidia-ptxjitcompiler.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libnvidia-ptxjitcompiler.so.1
