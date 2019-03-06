@@ -224,7 +224,7 @@ fi || :
 if [ "$1" -eq "0" ]; then # uninstall
     # Backup and remove xorg.conf
     [ -f %{_sysconfdir}/X11/xorg.conf ] && \
-      mv %{_sysconfdir}/X11/xorg.conf %{_sysconfdir}/X11/post-nvidia.xorg.conf.elreposave &>/dev/null
+      mv %{_sysconfdir}/X11/xorg.conf %{_sysconfdir}/X11/preun-nvidia.xorg.conf &>/dev/null
     # Clear grub option to disable nouveau for all RHEL7 kernels
     if [ -f %{_sysconfdir}/default/grub ]; then
       %{__perl} -pi -e 's|(GRUB_CMDLINE_LINUX=.*) nouveau\.modeset=0|$1|g' %{_sysconfdir}/default/grub
