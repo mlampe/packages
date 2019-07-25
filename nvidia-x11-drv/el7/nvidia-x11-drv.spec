@@ -115,7 +115,7 @@ pushd nvidiapkg
 # Added in 396.18 driver
 %{__install} -p -m 0755 libnvidia-glvkspirv.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
 # Added in 346.35 driver
-%{__install} -p -m 0755 libnvidia-gtk3.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
+%{__install} -p -m 0755 libnvidia-gtk2.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
 # Added libnvidia-ifr.so in 325.15 driver
 %{__install} -p -m 0755 libnvidia-ifr.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
 # Added libnvidia-ml.so in 270.xx series driver
