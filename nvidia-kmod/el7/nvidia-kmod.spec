@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 3.10.0-957.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 430.34
+Version: 430.40
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -64,6 +64,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Wed Jul 31 2019 Michael Lampe <mlampe0@googlemail.com> - 430.40-1.el7.ml
+- Updated to version 430.40
+
 * Thu Jul 11 2019 Michael Lampe <mlampe0@googlemail.com> - 430.34-1.el7.ml
 - Updated to version 430.34
 
