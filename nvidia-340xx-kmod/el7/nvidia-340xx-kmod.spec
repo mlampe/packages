@@ -2,11 +2,11 @@
 %define kmod_name nvidia-340xx
 
 # If kversion isn't defined on the rpmbuild line, define it here.
-%{!?kversion: %define kversion 3.10.0-957.el7.%{_target_cpu}}
+%{!?kversion: %define kversion 3.10.0-1062.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
 Version: 340.107
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
 Summary: NVIDIA OpenGL kernel driver module
@@ -20,6 +20,8 @@ ExclusiveArch: x86_64
 Source0:  ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}.run
 Source1:  blacklist-nouveau.conf
 Source10: kmodtool-%{kmod_name}-el7.sh
+
+Patch0: ubuntu.patch
 
 NoSource: 0
 
@@ -39,6 +41,7 @@ of the same variant of the Linux kernel and not on any one specific build.
 echo "override nvidia * weak-updates/%{kmod_name}" > kmod-%{kmod_name}.conf
 echo "override nvidia-uvm * weak-updates/%{kmod_name}" >> kmod-%{kmod_name}.conf
 sh %{SOURCE0} --extract-only --target nvidiapkg
+%patch0
 
 %{__cp} -a nvidiapkg _kmod_build_
 
@@ -68,6 +71,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Mon Aug 12 2019 Michael Lampe <mlampe0@googlemail.com> - 340.107-3
+- Rebuilt for 7.7 kernel
+
 * Mon Nov 19 2018 Michael Lampe <mlampe0@googlemail.com> - 340.107-2
 - Rebuilt for 7.6 kernel
 
@@ -79,61 +85,3 @@ popd
 
 * Wed Mar 14 2018 Michael Lampe <mlampe0@googlemail.com> - 340.106-2
 - Rebuilt for retpoline
-
-* Fri Feb 02 2018 Philip J Perry <phil@elrepo.org> - 340.106-1
-- Updated to version 340.106
-
-* Thu Aug 17 2017 Akemi Yagi <toracat@elrepo.org> - 340.102-4
-- Patch to fix compilation issue applied
-  [http://elrepo.org/bugs/view.php?id=768]
-
-* Sat Aug 05 2017 Philip J Perry <phil@elrepo.org> - 340.102-3
-- Rebuilt against RHEL 7.4 kernel
-
-* Fri Mar 03 2017 Philip J Perry <phil@elrepo.org> - 340.102-2
-- Rebuilt against kernel-3.10.0-514.10.2.el7 for kABI breakage
-
-* Sat Feb 25 2017 Philip J Perry <phil@elrepo.org> - 340.102-1
-- Updated to version 340.102
-
-* Sat Dec 17 2016 Philip J Perry <phil@elrepo.org> - 340.101-1
-- Updated to version 340.101
-
-* Tue Nov 08 2016 Philip J Perry <phil@elrepo.org> - 340.98-1
-- Updated to version 340.98
-- Rebuilt against RHEL 7.3 kernel
-
-* Fri Nov 20 2015 Philip J Perry <phil@elrepo.org> - 340.96-1
-- Updated to version 340.96
-- Rebuilt against RHEL 7.2 kernel
-
-* Sat Sep 12 2015 Philip J Perry <phil@elrepo.org> - 340.93-1
-- Updated to version 340.93
-
-* Thu Mar 05 2015 Philip J Perry <phil@elrepo.org> - 340.76-2
-- Rebuilt against RHEL 7.1 kernel
-
-* Thu Feb 05 2015 Philip J Perry <phil@elrepo.org> - 340.76-1
-- Update to version 340.76
-
-* Tue Dec 16 2014 Philip J Perry <phil@elrepo.org> - 340.65-1
-- Updated to version 340.65
-
-* Fri Sep 26 2014 Philip J Perry <phil@elrepo.org> - 340.32-1
-- Fork to legacy release nvidia-340xx
-
-* Sat Aug 16 2014 Philip J Perry <phil@elrepo.org> - 340.32-1
-- Updated to version 340.32
-
-* Wed Jul 09 2014 Philip J Perry <phil@elrepo.org> - 340.24-1
-- Updated to version 340.24
-- Enabled Secure Boot
-
-* Sat Jul 05 2014 Philip J Perry <phil@elrepo.org> - 331.89-1
-- Updated to version 331.89
-
-* Tue Jun 10 2014 Philip J Perry <phil@elrepo.org> - 331.79-2
-- Rebuilt for rhel-7.0 release
-
-* Wed May 21 2014 Philip J Perry <phil@elrepo.org> - 331.79-1
-- Initial el7 build of the nvidia kmod package.
