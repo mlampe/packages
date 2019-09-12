@@ -5,8 +5,8 @@
 %{!?kversion: %define kversion 3.10.0-1062.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 430.40
-Release: 2%{?dist}
+Version: 430.50
+Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
 Summary: NVIDIA OpenGL kernel driver module
@@ -64,6 +64,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Sep 12 2019 Michael Lampe <mlampe0@googlemail.com> - 430.50-1.el7.ml
+- Updated to version 430.50
+
 * Fri Aug 30 2019 Michael Lampe <mlampe0@googlemail.com> - 430.40-2.el7.ml
 - Rebuilt for 7.7 kernel
 
