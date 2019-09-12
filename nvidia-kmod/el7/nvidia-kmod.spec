@@ -2,10 +2,10 @@
 %define kmod_name nvidia
 
 # If kversion isn't defined on the rpmbuild line, define it here.
-%{!?kversion: %define kversion 3.10.0-957.el7.%{_target_cpu}}
+%{!?kversion: %define kversion 3.10.0-1062.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 430.40
+Version: 430.50
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -64,6 +64,12 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Sep 12 2019 Michael Lampe <mlampe0@googlemail.com> - 430.50-1.el7.ml
+- Updated to version 430.50
+
+* Fri Aug 30 2019 Michael Lampe <mlampe0@googlemail.com> - 430.40-2.el7.ml
+- Rebuilt for 7.7 kernel
+
 * Wed Jul 31 2019 Michael Lampe <mlampe0@googlemail.com> - 430.40-1.el7.ml
 - Updated to version 430.40
 
@@ -86,7 +92,7 @@ popd
 - Updated to version 410.93
 
 * Fri Nov 16 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-2.el7.ml
-- Rebuild for 7.6 kernel
+- Rebuilt for 7.6 kernel
 
 * Thu Nov 15 2018 Michael Lampe <mlampe0@googlemail.com> - 410.78-1.el7.ml
 - Updated to version 410.78
