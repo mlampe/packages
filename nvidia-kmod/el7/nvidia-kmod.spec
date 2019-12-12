@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 3.10.0-1062.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 440.31
+Version: 440.44
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -64,6 +64,12 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Fri Dec 13 2019 Michael Lampe <mlampe0@googlemail.com> - 440.44-1.el7.ml
+- Updated to version 440.44
+
+* Sat Nov 23 2019 Michael Lampe <mlampe0@googlemail.com> - 440.36-1.el7.ml
+- Updated to version 440.36
+
 * Mon Nov  4 2019 Michael Lampe <mlampe0@googlemail.com> - 440.31-1.el7.ml
 - Updated to version 440.31
 
