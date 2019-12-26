@@ -10,7 +10,7 @@
 %filter_setup
 
 Name:		nvidia-x11-drv-340xx
-Version:	340.107
+Version:	340.108
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -276,6 +276,9 @@ fi ||:
 %{_libdir}/xorg/modules/extensions/nvidia/libglx.so
 
 %changelog
+* Thu Dec 26 2019 Michael Lampe <mlampe0@googlemail.com> - 340.108-1
+- Updated to version 340.108
+
 * Thu Jun 07 2018 Michael Lampe <mlampe0@googlemail.com> - 340.107-1
 - Updated to version 340.107
 

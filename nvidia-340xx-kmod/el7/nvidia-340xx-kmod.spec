@@ -5,8 +5,8 @@
 %{!?kversion: %define kversion 3.10.0-1062.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 340.107
-Release: 3%{?dist}
+Version: 340.108
+Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
 Summary: NVIDIA OpenGL kernel driver module
@@ -20,8 +20,6 @@ ExclusiveArch: x86_64
 Source0:  ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}.run
 Source1:  blacklist-nouveau.conf
 Source10: kmodtool-%{kmod_name}-el7.sh
-
-Patch0: ubuntu.patch
 
 NoSource: 0
 
@@ -41,7 +39,6 @@ of the same variant of the Linux kernel and not on any one specific build.
 echo "override nvidia * weak-updates/%{kmod_name}" > kmod-%{kmod_name}.conf
 echo "override nvidia-uvm * weak-updates/%{kmod_name}" >> kmod-%{kmod_name}.conf
 sh %{SOURCE0} --extract-only --target nvidiapkg
-%patch0
 
 %{__cp} -a nvidiapkg _kmod_build_
 
@@ -71,6 +68,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Dec 26 2019 Michael Lampe <mlampe0@googlemail.com> - 340.108-1
+- Updated to version 340.108
+
 * Mon Aug 12 2019 Michael Lampe <mlampe0@googlemail.com> - 340.107-3
 - Rebuilt for 7.7 kernel
 
