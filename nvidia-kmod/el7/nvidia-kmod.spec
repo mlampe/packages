@@ -2,10 +2,10 @@
 %define kmod_name nvidia
 
 # If kversion isn't defined on the rpmbuild line, define it here.
-%{!?kversion: %define kversion 3.10.0-1062.el7.%{_target_cpu}}
+%{!?kversion: %define kversion 3.10.0-1127.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 440.64
+Version: 440.82
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -64,6 +64,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Apr  9 2020 Michael Lampe <mlampe0@googlemail.com> - 440.82-1.el7.ml
+- Updated to version 440.82
+
 * Tue Mar  3 2020 Michael Lampe <mlampe0@googlemail.com> - 440.64-1.el7.ml
 - Updated to version 440.64
 
