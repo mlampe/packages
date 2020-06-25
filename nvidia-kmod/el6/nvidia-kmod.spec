@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 2.6.32-754.el6.%{_target_cpu}}
 
 Name:	 %{kmod_name}-kmod
-Version: 440.82
+Version: 440.100
 Release: 1%{?dist}
 Group:	 System Environment/Kernel
 License: Proprietary
@@ -80,6 +80,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Thu Jun 25 2020 Michael Lampe <mlampe0@googlemail.com> - 440.100-1
+- Updated to version 440.100
+
 * Fri Apr 10 2020 Michael Lampe <mlampe0@googlemail.com> - 440.82-1
 - Updated to version 440.82
 
