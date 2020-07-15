@@ -8,7 +8,7 @@
 %filter_setup
 
 Name:		nvidia-x11-drv
-Version:	440.100
+Version:	450.57
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -103,8 +103,6 @@ pushd nvidiapkg
 %{__install} -p -m 0755 libnvidia-eglcore.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
 # Added libnvidia-encode.so in 310.19 driver
 %{__install} -p -m 0755 libnvidia-encode.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
-# Added libnvidia-fatbinaryloader.so in 361.28 driver
-%{__install} -p -m 0755 libnvidia-fatbinaryloader.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
 # Added libnvidia-fbc.so in 331.20 driver
 %{__install} -p -m 0755 libnvidia-fbc.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
 %{__install} -p -m 0755 libnvidia-glcore.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
@@ -118,6 +116,8 @@ pushd nvidiapkg
 %{__install} -p -m 0755 libnvidia-ifr.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
 # Added libnvidia-ml.so in 270.xx series driver
 %{__install} -p -m 0755 libnvidia-ml.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
+# Added libnvidia-ngx.so in 450.xx series driver
+%{__install} -p -m 0755 libnvidia-ngx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
 # Added libnvidia-opencl.so in 304.xx series driver
 %{__install} -p -m 0755 libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{_libdir}/
 # Added libnvidia-opticalflow.so in 418.43 driver
@@ -162,6 +162,9 @@ pushd nvidiapkg
 # Added libnvidia-ml.so in 270.xx series driver
 %{__ln_s} libnvidia-ml.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvidia-ml.so
 %{__ln_s} libnvidia-ml.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvidia-ml.so.1
+# Added libnvidia-ngx.so in 450.xx series driver
+%{__ln_s} libnvidia-ngx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvidia-ngx.so
+%{__ln_s} libnvidia-ngx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvidia-ngx.so.1
 # Added libnvidia-opencl.so in 304.xx series driver
 %{__ln_s} libnvidia-opencl.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libnvidia-opencl.so.1
 # Added libnvidia-opticalflow.so in 418.43 driver
@@ -274,6 +277,9 @@ fi || :
 %{_libdir}/xorg/modules/extensions/libglxserver_nvidia.so
 
 %changelog
+* Wed Jul 15 2020 Michael Lampe <mlampe0@googlemail.com> - 450.57-1.el7.ml
+- Updated to version 450.57
+
 * Thu Jun 25 2020 Michael Lampe <mlampe0@googlemail.com> - 440.100-1.el7.ml
 - Updated to version 440.100
 
