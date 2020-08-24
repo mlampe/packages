@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 3.10.0-1127.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 450.57
+Version: 450.66
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -64,6 +64,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Tue Aug 25 2020 Michael Lampe <mlampe0@googlemail.com> - 450.66-1.el7.ml
+- Updated to version 450.66
+
 * Wed Jul 15 2020 Michael Lampe <mlampe0@googlemail.com> - 450.57-1.el7.ml
 - Updated to version 450.57
 
