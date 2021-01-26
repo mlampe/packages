@@ -5,7 +5,7 @@
 %{!?kversion: %define kversion 3.10.0-1160.el7.%{_target_cpu}}
 
 Name:    %{kmod_name}-kmod
-Version: 460.32.03
+Version: 460.39
 Release: 1%{?dist}
 Group:   System Environment/Kernel
 License: Proprietary
@@ -64,6 +64,9 @@ popd
 %{__rm} -rf %{buildroot}
 
 %changelog
+* Tue Jan 26 2021 Michael Lampe <mlampe0@googlemail.com> - 460.39-1.el7.ml
+- Updated to 460.39
+
 * Thu Jan  7 2021 Michael Lampe <mlampe0@googlemail.com> - 460.32.03-1.el7.ml
 - Updated to 460.32.03
 

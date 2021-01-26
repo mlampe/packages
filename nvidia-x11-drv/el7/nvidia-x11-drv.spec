@@ -8,7 +8,7 @@
 %filter_setup
 
 Name:		nvidia-x11-drv
-Version:	460.32.03
+Version:	460.39
 Release:	1%{?dist}
 Group:		User Interface/X Hardware Support
 License:	Distributable
@@ -277,6 +277,9 @@ fi || :
 %{_libdir}/xorg/modules/extensions/libglxserver_nvidia.so
 
 %changelog
+* Tue Jan 26 2021 Michael Lampe <mlampe0@googlemail.com> - 460.39-1.el7.ml
+- Updated to 460.39
+
 * Thu Jan  7 2021 Michael Lampe <mlampe0@googlemail.com> - 460.32.03-1.el7.ml
 - Updated to 460.32.03
 
